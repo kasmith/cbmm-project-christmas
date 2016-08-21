@@ -7,7 +7,7 @@ from pygame.constants import *
 
 # modified trials directory
 #trdir = os.path.join('..','maketrials')
-trdir = os.path.join('..','python-trials')
+trdir = os.path.join('..','python-trials', 'trials')
 modfitdir = os.path.join('..','initial-frames')
 pg.init()
 
@@ -44,17 +44,15 @@ def extractVelocity(trnm, t=0.):
 if __name__ == '__main__':
 
     if len(sys.argv) > 1:
-        tnm = sys.argv[1]
-        if tnm not in trnames: raise Exception('Need a proper trial name')
+        tnm = [sys.argv[1]]
+        if tnm[0] not in trnames: raise Exception('Need a proper trial name')
     else:
-        tnm = random.sample(trnames,1)[0]
-        print tnm
+        tnm = trnames 
 
-    sc = pg.display.set_mode((1006,626))
-    pscr = drawFrame(tnm, 0.)
-    sc.blit(pscr,(0,0))
-    pg.display.flip()
-    running = True
-    while running:
-        for e in pg.event.get():
-            if e.type == MOUSEBUTTONDOWN: running = False
+    output_dir = 'frames'
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    for name in trnames:
+        output_file = os.path.join(output_dir, name + '.bmp')
+        saveFrame(output_file, name, 0.)
