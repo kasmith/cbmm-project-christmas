@@ -1,6 +1,7 @@
-from __future__ import division
+from __future__ import division, print_function
 from physicsTable import *
 from physicsTable.constants import *
+import threading
 import pygame as pg
 import random, os, sys
 import numpy as np
@@ -53,93 +54,116 @@ def checkSmallVel(v):
     return (atan < np.pi/40) or (atan > 19*np.pi/40)
 
 def MakeRandTrial(name, blocks, occs, covered = False, blockdims = (50,300), occdims = (150, 400), res = (1000, 620), maxfails = 10000):
-    fails = 0
-    chk = False
-    tr = RedGreenTrial(name, res, def_ball_vel = defVel)
-    
-    blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
-    pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
-    lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
-    tr.addGoal(pos,lr,REDGOAL,RED)
-    
-    chk = False
-    while not chk:
+
+    retry_flag = True
+
+    while retry_flag:
+        fails = 0
+        chk = False
+        tr = RedGreenTrial(name, res, def_ball_vel = defVel)
+       
         blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
         pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
         lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
-        tr.addGoal(pos,lr,GREENGOAL,GREEN)
-        if checkOverlap(tr):
-            fails += 1
-            tr.goals = [tr.goals[0]]
-        else: chk = True
-        if fails > maxfails:
-            print "Resetting trial"
-            return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
-            
-    for i in range(blocks):
+        tr.addGoal(pos,lr,REDGOAL,RED)
+        
         chk = False
         while not chk:
             blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
             pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
             lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
-            tr.addWall(pos,lr)
+            tr.addGoal(pos,lr,GREENGOAL,GREEN)
             if checkOverlap(tr):
                 fails += 1
-                tr.normwalls = tr.normwalls[:-1]
+                tr.goals = [tr.goals[0]]
             else: chk = True
             if fails > maxfails:
-                print "Resetting trial"
-                return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
-    
-    for i in range(occs):
+                print("Resetting trial")
+                #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+                continue
+                
+        for i in range(blocks):
+            chk = False
+            while not chk:
+                blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
+                pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
+                lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
+                tr.addWall(pos,lr)
+                if checkOverlap(tr):
+                    fails += 1
+                    tr.normwalls = tr.normwalls[:-1]
+                else: chk = True
+                if fails > maxfails:
+                    print("Resetting trial")
+                    #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+                    continue
+        
+        for i in range(occs):
+            chk = False
+            while not chk:
+                blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
+                pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
+                lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
+                noc = pg.Rect(pos,blocksize)
+                if noc.collidelist([makeRect(o[0],o[1]) for o in tr.occs]) == -1:
+                    tr.addOcc(pos,lr)
+                    chk = True
+                else:
+                    fails += 1
+
+        bsize = tr.dbr
         chk = False
         while not chk:
-            blocksize = (random.randint(blockdims[0],blockdims[1]),random.randint(blockdims[0],blockdims[1]))
-            pos = (random.randint(0,res[0]-blocksize[0]),random.randint(0,res[1]-blocksize[1]))
-            lr = (pos[0]+blocksize[0],pos[1]+blocksize[1])
-            noc = pg.Rect(pos,blocksize)
-            if noc.collidelist([makeRect(o[0],o[1]) for o in tr.occs]) == -1:
-                tr.addOcc(pos,lr)
-                chk = True
-            else:
-                fails += 1
-    
-    bsize = tr.dbr
-    chk = False
-    while not chk:
-        bpos = (random.randint(bsize, res[0]-bsize), random.randint(bsize,res[1]-bsize))
-        
-        vchk = False
-        while not vchk:
-            bvel = (random.random(), random.random())
-            if not checkSmallVel(bvel): vchk = True
-        
-        tr.addBall(bpos, bvel)
-        if checkOverlap(tr):
-            fails += 1
-            tr.ball = None
-        else: chk = True
-        if fails > maxfails:
-            print "Resetting trial"
-            return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+            bpos = (random.randint(bsize, res[0]-bsize), random.randint(bsize,res[1]-bsize))
             
-    tr.normalizeVel()
-    
-    if not tr.checkConsistency(10000):
-        return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+            vchk = False
+            while not vchk:
+                bvel = (random.random(), random.random())
+                if not checkSmallVel(bvel): vchk = True
+            
+            tr.addBall(bpos, bvel)
+            if checkOverlap(tr):
+                fails += 1
+                tr.ball = None
+            else: chk = True
+            if fails > maxfails:
+                print("Resetting trial")
+                #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+                continue
+               
+        tr.normalizeVel()
         
-    if tr.checkConsistency(3000):
-        print "Too short"
-        return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
-    
-    coverage = checkCoverage(tr)
-    if covered:
-        if not coverage[1]: return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
-    else:
-        if not coverage[0]: return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+        if not tr.checkConsistency(maxsteps=10000):
+            #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+            continue
+            
+        if tr.checkConsistency(maxsteps=3000):
+            print("Too short")
+            #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+            continue
+        
+        coverage = checkCoverage(tr)
+        if covered:
+            if not coverage[1]: 
+                #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+                continue
+        else:
+            if not coverage[0]: 
+                #return MakeRandTrial(name,blocks,occs,covered,blockdims,occdims,res,maxfails)
+                continue
+
+        retry_flag = False
     
     return tr
-    
+
+def threadMakeTrial(nTrials, b):
+    for i in range(nTrials):
+        nm = "RTr_Bl" + str(b) + "_" + str(i)
+        output_path = os.path.join(output_dir, nm + '.ptr')
+        if not os.path.exists(output_path):
+            print('Thread ' + str(b) + ': Trial ' + nm, file=sys.stderr)
+            t = MakeRandTrial(nm, b, 0)
+            t.save(output_path, askoverwrite=False)
     
 if __name__ == '__main__':
 
@@ -156,30 +180,13 @@ if __name__ == '__main__':
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    ### Ignoring JSON files for now (commented out) ###
-    #trlist = []
-
-    # Save qualitative trials
-    #qfiles = os.listdir(os.curdir)
-    #for f in qfiles:
-    #    if f[-4:] == '.ptr':
-    #        print f
-    #        tr = loadTrial(os.path.join(os.curdir,f))
-    #        tr.jsonify(f[:-4]+'.json',trialfolder,False)
-    #        trlist.append(f[:-4])
-    
-    #npcd = int(nTrials - len(trlist) / 5)
+    threads = []
 
     # Make random trials
     for b in range(1,6):
-        for i in range(nTrials):
-            nm = "RTr_Bl" + str(b) + "_" + str(i)
-            t = MakeRandTrial(nm, b, 0, False)
-            output_path = os.path.join(output_dir, nm + '.ptr')
-            t.save(output_path, askoverwrite=False)
-            #t.jsonify(nm+".json",trialfolder,askoverwrite=False)
-            #trlist.append(nm)
+        thr = threading.Thread(target=threadMakeTrial, args=(nTrials, b))
+        thr.start()
+        threads.append(thr)
 
-    #fllist = open(os.path.join(trialfolder,'TrList.json'),'w')
-    #fllist.write(json.dumps(trlist))
-    #fllist.close()
+    for thread in threads:
+        thread.join()
