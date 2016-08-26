@@ -8,7 +8,10 @@ import json
 
 defVel = 300
 nTrials = 20
-trialfolder = os.path.join('..','public_html','trials')
+# modified trial folder:
+#trialfolder = os.path.join('..','public_html','trials')
+trialfolder = os.path.join('..','psiturk-rg','templates', 'trials')
+
 #random.seed(10001)
 
 def makeRect(ul, lr):
