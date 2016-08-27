@@ -163,7 +163,8 @@ def train_googlenet():
     model = tflearn.DNN(network, checkpoint_path='/home/ubuntu/model_googlenet',
                         best_checkpoint_path='/home/ubuntu/model_googlenet_best',
                         tensorboard_dir='/home/ubuntu/extern/tflearn_logs/',
-                        max_checkpoints=1, tensorboard_verbose=2)
+                        max_checkpoints=3, tensorboard_verbose=2,
+                        best_val_accuracy=0.6)
     model.fit(X, Y, n_epoch=1000, validation_set=0.1, shuffle=True,
               show_metric=True, batch_size=64, snapshot_step=200,
               snapshot_epoch=False, run_id='googlenet_std')
