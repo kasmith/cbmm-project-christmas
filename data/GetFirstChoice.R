@@ -32,6 +32,8 @@ retdat = data.frame(WID = rep(wids,each=length(trnms)),
                     Trials = rep(trnms, times=length(wids)))
 retdat$First = mapply(getFromTrial,retdat$WID,retdat$Trials)
 
+write.csv(retdat, 'FullFirst.csv', row.names=F)
+
 trdat = ddply(retdat, 'Trials', summarize, Green = mean(First=='G',na.rm=T), 
               Red = mean(First=='R',na.rm=T))
 names(trdat)[1] = 'Trial'
