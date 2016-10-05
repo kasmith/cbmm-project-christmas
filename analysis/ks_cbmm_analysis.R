@@ -173,7 +173,7 @@ ggplot(pcors, aes(x=Time)) +
   geom_ribbon(aes(ymin = NN.ci.025, ymax = NN.ci.975), color = 'red', fill='red', alpha = .4) +
   geom_ribbon(aes(ymin = Phys.ci.025, ymax = Phys.ci.975), color = 'blue', fill='blue', alpha = .4) +
   geom_line(aes(y=NN.pcor), color='red') + geom_line(aes(y=Phys.pcor), color='blue') + 
-  xlim(tlims) + ylim(c(-.2,1)) + geom_hline(yintercept=0)
+  xlim(tlims) + ylim(c(-.3,1)) + geom_hline(yintercept=0)
 
 
 rem_tlims = c(0., 3.)
@@ -191,3 +191,11 @@ phys_pcors_rem$Phys.ci.975 = sapply(phys_pcors_rem$ci, function(x){x[2]})
 phys_pcors_rem = phys_pcors_rem %>% select(-ci)
 
 pcors_rem = merge(nn_pcors_rem, phys_pcors_rem)
+
+ggplot(pcors_rem, aes(x = RemTime)) + scale_x_reverse() + 
+  geom_ribbon(aes(ymin = NN.ci.025, ymax = NN.ci.975), color = 'red', fill='red', alpha = .4) +
+  geom_ribbon(aes(ymin = Phys.ci.025, ymax = Phys.ci.975), color = 'blue', fill='blue', alpha = .4) +
+  geom_line(aes(y=NN.pcor), color='red') + geom_line(aes(y=Phys.pcor), color='blue') + 
+  ylim(c(-.3,1)) + geom_hline(yintercept=0) 
+
+
