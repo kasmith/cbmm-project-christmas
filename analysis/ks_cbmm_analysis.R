@@ -6,12 +6,15 @@ library(tidyr)
 
 ######### Load info
 
-nndat = read.csv('../data/model_googlenet-4800_complete_trials.csv')
+
 empdat_full = read.csv('../data/OnlineRGGoodData.csv')
 empdat = empdat_full %>% subset(Prediction != 'U') %>% group_by(Trial,Time) %>% 
   summarize(PRed = mean(NormPrediction == 'R'), Acc = mean(as.character(NormPrediction) == as.character(NormGoal)), N = length(Worker))
 
 goal_info = empdat_full %>% group_by(Trial) %>% select(Trial, NormGoal) %>% ungroup %>% unique
+time_info = empdat_full %>% group_by(Trial) %>% summarize(MaxTime = max(Time)) %>% ungroup
+
+nndat = read.csv('../data/model_googlenet-4800_complete_trials.csv')
 nndat = merge(nndat, goal_info)
 nndat$Acc = with(nndat, ifelse(NormGoal == 'G', PGreen, PRed))
 
@@ -36,7 +39,8 @@ sapply(wtd_trial_acc[2:4], mean)
 ######## Full P(Red)s
 full_dat = empdat %>% mutate(EmpRed = PRed) %>% select(Trial, Time, N, EmpRed) %>%
   merge(nndat %>% mutate(NNRed = PRed) %>% select(Trial, Time, NNRed)) %>%
-  merge(physdat %>% mutate(PhysRed = PRGA, Goal = NormGoal) %>% select(Trial, Time, PhysRed, Goal))
+  merge(physdat %>% mutate(PhysRed = PRGA, Goal = NormGoal) %>% select(Trial, Time, PhysRed, Goal)) %>%
+  merge(time_info) %>% mutate(RemTime = round(MaxTime - Time,1))
 
 ######## Plot red over time
 plot_reds = function(trnm, minobs = 3) {
@@ -122,3 +126,68 @@ overall_phys_cor = with(full_dat, wtd.cors(EmpRed, PhysRed, weight=N))[1,1] # r_
 # Without weighting, correlations look worse...
 no_weight_nn_cor = with(full_dat, cor(EmpRed, NNRed)) # r = 0.779
 no_weight_phys_cor = with(full_dat, cor(EmpRed, PhysRed)) # r = 0.891
+
+# Need to make my own weighted partial correlations...
+# (I think this works... it does for the degenerate case of equal weights)
+wtd_pcor = function(x,y,z,weight) {
+  # Residualize
+  r_x = resid(lm(x ~ z, weights = weight))
+  r_y = resid(lm(y ~ z, weights = weight))
+  N = length(x)
+  
+  w_mx = sum(weight*r_x)/sum(weight)
+  w_my = sum(weight*r_y)/sum(weight)
+  w_cov_xy = sum(weight * (r_x-w_mx)*(r_y-w_my)) / sum(weight)
+  w_cov_xx = sum(weight * (r_x-w_mx)*(r_x-w_mx)) / sum(weight)
+  w_cov_yy = sum(weight * (r_y-w_my)*(r_y-w_my)) / sum(weight)
+  w_cor = w_cov_xy / sqrt(w_cov_xx * w_cov_yy)
+  return(w_cor)
+}
+
+boot_wtd_pcor = function(x,y,z,weight,range = c(.025, .975), ntimes = 500) {
+  nsamp = length(x)
+  reps = replicate(ntimes, (function() {
+    this.idx = base::sample(1:nsamp, nsamp, replace=T)
+    return(wtd_pcor(x[this.idx], y[this.idx], z[this.idx], weight[this.idx]))
+  })())
+  return(quantile(reps, range))
+}
+
+tlims = c(.4, 4.)
+
+nn_pcors = full_dat %>% subset(Time >= tlims[1] & Time <= tlims[2]) %>% group_by(Time) %>% 
+  summarize(NN.pcor = wtd_pcor(EmpRed, NNRed, PhysRed, N), ci = list(boot_wtd_pcor(EmpRed, NNRed, PhysRed, N)))
+nn_pcors$NN.ci.025 = sapply(nn_pcors$ci, function(x) {x[1]})
+nn_pcors$NN.ci.975 = sapply(nn_pcors$ci, function(x) {x[2]})
+nn_pcors = nn_pcors %>% select(-ci)
+
+phys_pcors = full_dat %>% subset(Time >= tlims[1] & Time <= tlims[2]) %>% group_by(Time) %>% 
+  summarize(Phys.pcor = wtd_pcor(EmpRed, PhysRed, NNRed, N), ci = list(boot_wtd_pcor(EmpRed, PhysRed, NNRed, N)))
+phys_pcors$Phys.ci.025 = sapply(phys_pcors$ci, function(x){x[1]})
+phys_pcors$Phys.ci.975 = sapply(phys_pcors$ci, function(x){x[2]})
+phys_pcors = phys_pcors %>% select(-ci)
+
+pcors = merge(nn_pcors, phys_pcors)
+
+ggplot(pcors, aes(x=Time)) + 
+  geom_ribbon(aes(ymin = NN.ci.025, ymax = NN.ci.975), color = 'red', fill='red', alpha = .4) +
+  geom_ribbon(aes(ymin = Phys.ci.025, ymax = Phys.ci.975), color = 'blue', fill='blue', alpha = .4) +
+  geom_line(aes(y=NN.pcor), color='red') + geom_line(aes(y=Phys.pcor), color='blue') + 
+  xlim(tlims) + ylim(c(-.2,1)) + geom_hline(yintercept=0)
+
+
+rem_tlims = c(0., 3.)
+
+nn_pcors_rem = full_dat %>% subset(RemTime >= rem_tlims[1] & RemTime <= rem_tlims[2]) %>% group_by(RemTime) %>% 
+  summarize(NN.pcor = wtd_pcor(EmpRed, NNRed, PhysRed, N), ci = list(boot_wtd_pcor(EmpRed, NNRed, PhysRed, N)))
+nn_pcors_rem$NN.ci.025 = sapply(nn_pcors_rem$ci, function(x) {x[1]})
+nn_pcors_rem$NN.ci.975 = sapply(nn_pcors_rem$ci, function(x) {x[2]})
+nn_pcors_rem = nn_pcors_rem %>% select(-ci)
+
+phys_pcors_rem = full_dat %>% subset(RemTime >= rem_tlims[1] & RemTime <= rem_tlims[2]) %>% group_by(RemTime) %>% 
+  summarize(Phys.pcor = wtd_pcor(EmpRed, PhysRed, NNRed, N), ci = list(boot_wtd_pcor(EmpRed, PhysRed, NNRed, N)))
+phys_pcors_rem$Phys.ci.025 = sapply(phys_pcors_rem$ci, function(x){x[1]})
+phys_pcors_rem$Phys.ci.975 = sapply(phys_pcors_rem$ci, function(x){x[2]})
+phys_pcors_rem = phys_pcors_rem %>% select(-ci)
+
+pcors_rem = merge(nn_pcors_rem, phys_pcors_rem)
