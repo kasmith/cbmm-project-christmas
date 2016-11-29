@@ -83,8 +83,10 @@ function shuffle(array) {
   return array;
 }
 
+DT = 0.025;
 DISPLAY_TIME = 0.5;
-RESPONSE_TIME = 1.5;
+RESPONSE_TIME = 2.5;
+MAX_TIME = 20;
 
 Experiment = function(triallist, table, leftctr, rightctr, score, ptobj) {
     
@@ -126,7 +128,7 @@ Experiment.prototype.startTrials = function(me) {
 
 Experiment.prototype.run = function(me) {
     me.badtrial = false;
-    me.trial.runtrial(.025,DISPLAY_TIME,RESPONSE_TIME,function () {me.recordTrial(me);});
+    me.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {me.recordTrial(me);});
 };
 
 Experiment.prototype.nextTrial = function(me) {
@@ -216,7 +218,7 @@ Experiment.prototype.instructions = function() {
     runS1 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
-        that2.trial.runtrial(.025,DISPLAY_TIME,RESPONSE_TIME,function () {
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
                 that2.trial.showinstruct(isizing,'black','white',runS1,true);
                 that2.badtrial = false;
@@ -233,7 +235,7 @@ Experiment.prototype.instructions = function() {
     runS2 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
-        that2.trial.runtrial(.025,DISPLAY_TIME,RESPONSE_TIME,function () {
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
                 that2.trial.showinstruct(isizing,'black','white',runS2,true);
                 that2.badtrial = false;
@@ -254,7 +256,7 @@ Experiment.prototype.instructions = function() {
     runS3 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
-        that2.trial.runtrial(.025,DISPLAY_TIME,RESPONSE_TIME,function () {
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
                 that2.trial.showinstruct(isizing,'black','white',runS3,true);
                 that2.badtrial = false;
@@ -277,7 +279,7 @@ Experiment.prototype.instructions = function() {
     runS4 = function() {
         that2.trial.loadTrial('trials/InstTr2.json');
         that2.badtrial = false;
-        that2.trial.runtrial(.025,DISPLAY_TIME,RESPONSE_TIME,function () {
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
                 that2.trial.showinstruct(isizing,'black','white',runS4,true);
                 that2.badtrial = false;

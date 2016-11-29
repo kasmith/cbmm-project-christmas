@@ -128,8 +128,8 @@ KeyHandler.prototype.getstate = function() {return this.state;};
 KeyHandler.prototype.setpress = function(fn) {this.onkp = fn;};
 KeyHandler.prototype.setrelease = function(fn) {this.onkr = fn;};
 
-TIME_BEGIN = 0.5;
-TIME_END = 1.0;
+TIME_BEGIN = 0.3;
+TIME_END = 2.0;
 
 Trial = function(table, leftbtn, rightbtn, score, redonleft, motioncond) {
     this.rol = redonleft;
@@ -284,37 +284,54 @@ Trial.prototype.writenewscore = function(newscore,showscore) {
         ctx.fillText(tx2,centx,centy);
     }
 };
-Trial.prototype.showtrial = function(dt,displaytime,responsetime,callback,showscore) {
+Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callback,showscore) {
     var that = this;
 
     // function to be called after subject response
     var finishtrial = function() {
         that.keyhandler.setpress(function(k) {});
 
-        // Update score
-        if (that.response === NORESPONSE) {
-            score = 0;
-        }
-        else if (that.realgoal !== that.response) {
-            score = -10;
-        }
-        else {
-            score = 100 * (1 - (that.resptime-TIME_BEGIN)/(TIME_END-TIME_BEGIN)); 
-            score = Math.round(Math.max(Math.min(score,100),0));
-        }
-        that.score.add(score);
-        that.draw();
-        that.writenewscore(score,showscore);
-        that.done = true;
-        that.lastscore = score;
-        
-        that.keyhandler.setpress(function(k) {
-            if (k===32) { 
-                that.hidetext();
-                that.keyhandler.setpress(function(k) {});
-                callback();
+        // display trial ending for feedback at triple speed
+        var pev = 0;
+        interid = setInterval(function () {
+            pev = that.tb.step(dt,maxtime);
+
+            that.tb.draw();
+            that.score.draw();
+            that.lbtn.draw(true);
+            that.rbtn.draw(true);
+
+            if (pev !== 0) {
+                assert(pev !== TIMEUP, "Oddly, your trial ran too long");
+                clearInterval(interid);
+
+                // Update score
+                if (that.response === NORESPONSE) {
+                    score = 0;
+                }
+                else if (that.realgoal !== that.response) {
+                    score = -10;
+                }
+                else {
+                    score = 100 * (1 - (that.resptime-TIME_BEGIN)/(TIME_END-TIME_BEGIN)); 
+                    score = Math.round(Math.max(Math.min(score,100),0));
+                }
+                that.score.add(score);
+                that.draw();
+                that.writenewscore(score,showscore);
+                that.done = true;
+                that.lastscore = score;
+                
+                that.keyhandler.setpress(function(k) {
+                    if (k===32) { 
+                        that.hidetext();
+                        that.keyhandler.setpress(function(k) {});
+                        callback();
+                    }
+                });
+
             }
-        });
+        }, dt*1000 / 3);
     };
 
     // function to be called after trial display, to wait for response
@@ -330,20 +347,21 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,callback,showsc
             if (k===77) { 
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
+                that.resptime = (new Date() - start) / 1000;
                 if (that.rol) that.response = GREENGOAL;
                 else that.response = REDGOAL;
-                that.resptime = (new Date() - start) / 1000;
                 finishtrial();
             }
             else if (k===90) {
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
+                that.resptime = (new Date() - start) / 1000;
                 if (that.rol) that.response = REDGOAL;
                 else that.response = GREENGOAL;
-                that.resptime = (new Date() - start) / 1000;
                 finishtrial();
             }
         });
+        // TODO Fix race condition, multiple calls to finishtrial
         timeoutid = setTimeout(finishtrial, responsetime*1000);
     };
 
@@ -385,7 +403,7 @@ Trial.prototype.isswitched = function() {
     return this.goalswitched;
 };
 
-Trial.prototype.runtrial = function(dt,displaytime,responsetime,callback,randomizegoal,showscore) {
+Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,randomizegoal,showscore) {
     if (typeof(randomizegoal) === 'undefined') randomizegoal = true;
     if (randomizegoal) {
         if (Math.random() < 0.5) 
@@ -399,6 +417,6 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,callback,randomi
     }
     else this.goalswitched = false;
     var that = this;
-    var runfn = function() {that.showtrial(dt,displaytime,responsetime,callback,showscore);};
+    var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};
     this.showinstruct('Press the spacebar to begin','black','lightgrey',runfn);
 };
