@@ -146,8 +146,7 @@ Experiment.prototype.nextTrial = function(me) {
 
 Experiment.prototype.recordTrial = function(me) {
     var trname = me.trial.tb.name;
-    var motioncond = "PLACEHOLDER";
-    //var motioncond = me.trial.motioncond
+    var motioncond = me.trial.motioncond
     var goalsw = me.trial.isswitched();
     var resp = me.trial.response;
     var resptime = me.trial.resptime;

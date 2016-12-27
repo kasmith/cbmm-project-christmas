@@ -131,7 +131,7 @@ KeyHandler.prototype.setrelease = function(fn) {this.onkr = fn;};
 TIME_BEGIN = 0.3;
 TIME_END = 2.0;
 
-Trial = function(table, leftbtn, rightbtn, score, redonleft, motioncond) {
+Trial = function(table, leftbtn, rightbtn, score, redonleft) {
     this.rol = redonleft;
     this.tbele = tbele = document.getElementById(table);
     if (redonleft) {lccol = RED; rccol = GREEN;}
@@ -142,7 +142,7 @@ Trial = function(table, leftbtn, rightbtn, score, redonleft, motioncond) {
     this.response = NORESPONSE; 
     this.resptime = -1;
     this.goalswitched = false;
-    this.motioncond = motioncond;
+    this.motioncond = 1;
     this.done = false;
     this.paused = false;
 
@@ -286,11 +286,16 @@ Trial.prototype.writenewscore = function(newscore,showscore) {
 };
 Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callback,showscore) {
     var that = this;
+    // store trial ball vel
+    var vel = this.tb.ball.getvel();
+    console.info(vel['x']);
 
     // function to be called after subject response
     var finishtrial = function() {
         that.keyhandler.setpress(function(k) {});
 
+        // set ball vel back to original
+        that.tb.ball.setvel(vel['x'], vel['y']);
         // display trial ending for feedback at triple speed
         var pev = 0;
         interid = setInterval(function () {
@@ -365,7 +370,9 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
         timeoutid = setTimeout(finishtrial, responsetime*1000);
     };
 
-    // display trial
+    // set ball vel by motion condition
+    this.tb.ball.setvel(vel['x']*this.motioncond, vel['y']*this.motioncond);
+    // display trial 
     var pev = 0;
     interid = setInterval(function () {
         pev = that.tb.step(dt,displaytime);
@@ -403,7 +410,7 @@ Trial.prototype.isswitched = function() {
     return this.goalswitched;
 };
 
-Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,randomizegoal,showscore) {
+Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,randomizegoal,showscore,motioncond) {
     if (typeof(randomizegoal) === 'undefined') randomizegoal = true;
     if (randomizegoal) {
         if (Math.random() < 0.5) 
@@ -416,6 +423,12 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback
         }
     }
     else this.goalswitched = false;
+    // generate random motion condition if undefined, one of {-1,0,1}
+    if (typeof(motioncond) === 'undefined') 
+        motioncond = Math.floor(Math.random()*3)-1; 
+    this.motioncond = motioncond;
+    this.motioncond = 0;
+
     var that = this;
     var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};
     this.showinstruct('Press the spacebar to begin','black','lightgrey',runfn);
