@@ -88,7 +88,7 @@ DISPLAY_TIME = 0.5;
 RESPONSE_TIME = 2.5;
 MAX_TIME = 20;
 
-Experiment = function(triallist, table, leftctr, rightctr, score, ptobj) {
+Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, ptobj) {
     
     this.pt = ptobj;
     
@@ -115,7 +115,8 @@ Experiment = function(triallist, table, leftctr, rightctr, score, ptobj) {
     
     // Load in the trial object
     this.rol = Math.random() < 0.5;
-    this.trial = new Trial(table,leftctr,rightctr,score,this.rol);
+    this.trial = new Trial(table,leftctr,rightctr,score,trcounter,this.rol);
+    this.trial.trcounter.setnumtrials(this.trlist.length);
     
     this.pt.recordUnstructuredData('RedOnLeft',this.rol);
     
@@ -128,7 +129,9 @@ Experiment.prototype.startTrials = function(me) {
 
 Experiment.prototype.run = function(me) {
     me.badtrial = false;
-    me.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {me.recordTrial(me);});
+    me.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
+	me.recordTrial(me);
+    });
 };
 
 Experiment.prototype.nextTrial = function(me) {
@@ -138,9 +141,13 @@ Experiment.prototype.nextTrial = function(me) {
         me.endExp();
         return;
     }
-    
+    me.trial.trcounter.incr();
+    console.info(me.trlist.length);
+    console.info(me.tridx);
+    // XXX Will always load same trial (switch back after debugging)
+    me.trial.loadTrial('trials/RTr_Bl1_0.json');
     //me.trial.loadTrial('trials/'+me.trlist[me.tridx]+'.json');
-    me.trial.loadFromTList(me.trlist[me.tridx],me.loaded);
+    //me.trial.loadFromTList(me.trlist[me.tridx],me.loaded);
     me.run(me);
 };
 

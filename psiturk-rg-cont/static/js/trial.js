@@ -49,7 +49,7 @@ Button.prototype.draw = function(clear) {
     if (typeof(clear)==='undefined') clear = false;
     if (clear) this.ctx.clearRect(0,0,this.ele.width,this.ele.height);
     else {
-        this.ctx.fillStyle = this.color;
+	this.ctx.fillStyle = this.color;
         this.ctx.fillRect(0,0,this.ele.width,this.ele.height);
         this.ctx.fillStyle = 'black';
         this.ctx.fillText(this.onleft ? 'z' : 'm', this.ele.width/2, this.ele.height/2);
@@ -85,6 +85,40 @@ ScoreDisp.prototype.reset = function() {
     this.score = 0;
 };
 
+
+TrialCounter = function(elemname) {
+    this.ele = document.getElementById(elemname);
+    this.ctx = this.ele.getContext('2d');
+    this.count = 1;
+    this.numtrials = 1;
+};
+
+TrialCounter.prototype.incr = function() {
+    this.count += 1;
+};
+TrialCounter.prototype.setnumtrials = function(numtrials) {
+    this.numtrials = numtrials;
+}
+TrialCounter.prototype.draw = function() {
+    var ewid = this.ele.width;
+    var ehgt = this.ele.height;
+    
+    this.ctx.clearRect(0,0,this.ele.width,this.ele.height);
+    
+    this.ctx.font = '20px Times New Roman bold';
+    this.ctx.fillStyle = 'black';
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'top';
+    this.ctx.fillText('Trial:',ewid-25,0);
+    
+    this.ctx.textBaseline = 'bottom';
+    this.ctx.fillText(this.count+'/'+this.numtrials,ewid-25,ehgt);
+    this.ctx.fillStyle = 'white';
+    
+};
+TrialCounter.prototype.reset = function() {
+    this.count = 1;
+};
 
 /**
  * 
@@ -131,14 +165,15 @@ KeyHandler.prototype.setrelease = function(fn) {this.onkr = fn;};
 TIME_BEGIN = 0.3;
 TIME_END = 2.0;
 
-Trial = function(table, leftbtn, rightbtn, score, redonleft) {
+Trial = function(table, leftbtn, rightbtn, score, trcounter, redonleft) {
     this.rol = redonleft;
     this.tbele = tbele = document.getElementById(table);
-    if (redonleft) {lccol = RED; rccol = GREEN;}
-    else {lccol = GREEN; rccol = RED;}
-    this.lbtn = new Button(true,lccol,leftbtn);
-    this.rbtn = new Button(false,rccol,rightbtn);
+    if (redonleft) {lbcol = RED; rbcol = GREEN;}
+    else {lbcol = GREEN; rbcol = RED;}
+    this.lbtn = new Button(true,lbcol,leftbtn);
+    this.rbtn = new Button(false,rbcol,rightbtn);
     this.score = new ScoreDisp(score);
+    this.trcounter = new TrialCounter(trcounter);
     this.response = NORESPONSE; 
     this.resptime = -1;
     this.goalswitched = false;
@@ -181,6 +216,7 @@ Trial.prototype.draw = function() {
     this.lbtn.draw();
     this.rbtn.draw();
     this.score.draw();
+    this.trcounter.draw();
 };
 Trial.prototype.step = function(dt) {
     var e = this.tb.step(dt);
@@ -216,6 +252,7 @@ Trial.prototype.displaytext = function(text, textcol, bkcol,hideall) {
         $("#"+this.lbtn.ele.id).hide(0);
         $("#"+this.score.ele.id).hide(0);
         $("#"+this.rbtn.ele.id).hide(0);
+        $("#"+this.trcounter.ele.id).hide(0);
     }
     
     
@@ -231,6 +268,7 @@ Trial.prototype.hidetext = function() {
     $("#"+this.lbtn.ele.id).show(0);
     $("#"+this.score.ele.id).show(0);
     $("#"+this.rbtn.ele.id).show(0);
+    $("#"+this.trcounter.ele.id).show(0);
     $('#textfield').hide(0);
 };
 Trial.prototype.showinstruct = function(text,textcol,bkcol, callback, hideall) {
@@ -244,12 +282,13 @@ Trial.prototype.showinstruct = function(text,textcol,bkcol, callback, hideall) {
             callback();
         }
     });
-
 };
+
 Trial.prototype.replaceText = function(newtext,textcol,bkcol) {
     this.oldtext = $('#textfield').html();
     this.displaytext(newtext,textcol,bkcol);
 };
+
 Trial.prototype.restoreText = function(textcol,bkcol) {
     this.displaytext(this.oldtext,textcol,bkcol);
     this.oldtext = '';
@@ -288,21 +327,24 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
     var that = this;
     // store trial ball vel
     var vel = this.tb.ball.getvel();
-    console.info(vel['x']);
 
     // function to be called after subject response
     var finishtrial = function() {
         that.keyhandler.setpress(function(k) {});
 
-        // set ball vel back to original
-        that.tb.ball.setvel(vel['x'], vel['y']);
+        // set ball vel back to original, if it was set to 0
+        if (that.motioncond == 0) {
+            that.tb.ball.setvel(vel['x'], vel['y']);
+	}
         // display trial ending for feedback at triple speed
         var pev = 0;
         interid = setInterval(function () {
             pev = that.tb.step(dt,maxtime);
 
+	    //TODO Move this all into trial draw() with parameter for buttons
             that.tb.draw();
             that.score.draw();
+            that.trcounter.draw();
             that.lbtn.draw(true);
             that.rbtn.draw(true);
 
@@ -377,8 +419,10 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
     interid = setInterval(function () {
         pev = that.tb.step(dt,displaytime);
 
+	//TODO Move this all into trial draw() with parameter for buttons
         that.tb.draw();
         that.score.draw();
+        that.trcounter.draw();
         that.lbtn.draw(true);
         that.rbtn.draw(true);
 
@@ -402,6 +446,13 @@ Trial.prototype.switchgoal = function() {
             g.onret = GREENGOAL;
             g.color = GREEN;
         }
+    }
+    
+    if (this.realgoal === GREENGOAL) {
+        this.realgoal = REDGOAL;
+    }
+    else {
+	this.realgoal = GREENGOAL;
     }
     //this.goalswitched = true;
 };
@@ -427,7 +478,6 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback
     if (typeof(motioncond) === 'undefined') 
         motioncond = Math.floor(Math.random()*3)-1; 
     this.motioncond = motioncond;
-    this.motioncond = 0;
 
     var that = this;
     var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};
