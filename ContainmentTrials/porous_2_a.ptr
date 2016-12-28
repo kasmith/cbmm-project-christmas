@@ -14,11 +14,7 @@ p6
 I100
 sS'name'
 p7
-<<<<<<< HEAD
-S'porous_2_a'
-=======
 S'Untitled'
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 p8
 sS'bkc'
 p9
@@ -44,19 +40,11 @@ p15
 sS'normwalls'
 p17
 (lp18
-<<<<<<< HEAD
-((I201
-I412
-tp19
-(I759
-I437
-=======
 ((I296
 I79
 tp19
 (I334
 I434
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp20
 (I0
 I0
@@ -64,62 +52,33 @@ I0
 tp21
 F1
 tp22
-<<<<<<< HEAD
-a((I199
-I84
-tp23
-(I226
-I435
-=======
 a((I65
 I414
 tp23
 (I333
 I436
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp24
 g21
 F1
 tp25
-<<<<<<< HEAD
-a((I130
-I138
-tp26
-(I199
-I139
-=======
 a((I66
 I415
 tp26
 (I96
 I590
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp27
 g21
 F1
 tp28
-<<<<<<< HEAD
-a((I199
-I85
-tp29
-(I758
-I110
-=======
 a((I834
 I426
 tp29
 (I863
 I477
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp30
 g21
 F1
 tp31
-<<<<<<< HEAD
-asS'ce'
-p32
-(lp33
-=======
 a((I601
 I406
 tp32
@@ -177,43 +136,11 @@ tp49
 asS'ce'
 p50
 (lp51
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I1
 aI3
 aI2
 aI4
 asS'paddle'
-<<<<<<< HEAD
-p34
-NsS'dims'
-p35
-(I1000
-I600
-tp36
-sS'ball'
-p37
-((I456
-I325
-tp38
-(F-237.66775104205203
-F-183.06840282968872
-tI20
-g14
-F1
-tp39
-sS'dwc'
-p40
-g21
-sS'goals'
-p41
-(lp42
-((I7
-I487
-tp43
-(I211
-I583
-tp44
-=======
 p52
 NsS'dims'
 p53
@@ -243,21 +170,10 @@ tp61
 (I810
 I389
 tp62
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I201
 (I255
 I0
 I0
-<<<<<<< HEAD
-tp45
-tp46
-a((I757
-I114
-tp47
-(I793
-I407
-tp48
-=======
 tp63
 tp64
 a((I120
@@ -266,26 +182,10 @@ tp65
 (I190
 I550
 tp66
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I202
 (I0
 I255
 I0
-<<<<<<< HEAD
-tp49
-tp50
-asS'abnormwalls'
-p51
-(lp52
-sS'dpc'
-p53
-g21
-sS'dbr'
-p54
-I20
-sS'dbv'
-p55
-=======
 tp67
 tp68
 asS'abnormwalls'
@@ -299,6 +199,5 @@ p72
 I20
 sS'dbv'
 p73
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I300
 sb.

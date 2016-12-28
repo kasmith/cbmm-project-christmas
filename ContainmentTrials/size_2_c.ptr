@@ -14,11 +14,7 @@ p6
 I100
 sS'name'
 p7
-<<<<<<< HEAD
-S'size_2_b'
-=======
 S'size_2_c'
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 p8
 sS'bkc'
 p9
@@ -44,19 +40,11 @@ p15
 sS'normwalls'
 p17
 (lp18
-<<<<<<< HEAD
-((I11
-I561
-tp19
-(I507
-I582
-=======
 ((I590
 I304
 tp19
 (I901
 I338
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp20
 (I0
 I0
@@ -64,79 +52,42 @@ I0
 tp21
 F1
 tp22
-<<<<<<< HEAD
-a((I484
-I156
-tp23
-(I509
-I580
-=======
 a((I867
 I330
 tp23
 (I902
 I461
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp24
 g21
 F1
 tp25
-<<<<<<< HEAD
-a((I486
-I168
-tp26
-(I486
-I168
-=======
 a((I127
 I238
 tp26
 (I310
 I269
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp27
 g21
 F1
 tp28
-<<<<<<< HEAD
-a((I12
-I156
-tp29
-(I509
-I176
-=======
 a((I287
 I239
 tp29
 (I312
 I563
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp30
 g21
 F1
 tp31
-<<<<<<< HEAD
-a((I12
-I157
-tp32
-(I36
-I585
-=======
 a((I288
 I558
 tp32
 (I577
 I587
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 tp33
 g21
 F1
 tp34
-<<<<<<< HEAD
-asS'ce'
-p35
-(lp36
-=======
 a((I342
 I8
 tp35
@@ -203,43 +154,11 @@ tp55
 asS'ce'
 p56
 (lp57
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I1
 aI3
 aI2
 aI4
 asS'paddle'
-<<<<<<< HEAD
-p37
-NsS'dims'
-p38
-(I1000
-I600
-tp39
-sS'ball'
-p40
-((I63
-I537
-tp41
-(F238.0819083875748
-F-182.52946309714068
-tI20
-g14
-F1
-tp42
-sS'dwc'
-p43
-g21
-sS'goals'
-p44
-(lp45
-((I610
-I175
-tp46
-(I681
-I218
-tp47
-=======
 p58
 NsS'dims'
 p59
@@ -269,21 +188,10 @@ tp67
 (I963
 I67
 tp68
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I201
 (I255
 I0
 I0
-<<<<<<< HEAD
-tp48
-tp49
-a((I424
-I180
-tp50
-(I483
-I224
-tp51
-=======
 tp69
 tp70
 a((I325
@@ -292,26 +200,10 @@ tp71
 (I541
 I550
 tp72
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I202
 (I0
 I255
 I0
-<<<<<<< HEAD
-tp52
-tp53
-asS'abnormwalls'
-p54
-(lp55
-sS'dpc'
-p56
-g21
-sS'dbr'
-p57
-I20
-sS'dbv'
-p58
-=======
 tp73
 tp74
 asS'abnormwalls'
@@ -325,6 +217,5 @@ p78
 I20
 sS'dbv'
 p79
->>>>>>> 0dff063851eff88d7375cafc7e22bc8a52f9a95a
 I300
 sb.
