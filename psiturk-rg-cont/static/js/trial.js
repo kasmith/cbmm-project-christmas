@@ -91,6 +91,7 @@ TrialCounter = function(elemname) {
     this.ctx = this.ele.getContext('2d');
     this.count = 1;
     this.numtrials = 1;
+    this.display = false;
 };
 
 TrialCounter.prototype.incr = function() {
@@ -100,6 +101,8 @@ TrialCounter.prototype.setnumtrials = function(numtrials) {
     this.numtrials = numtrials;
 }
 TrialCounter.prototype.draw = function() {
+    if (!this.display) return;
+
     var ewid = this.ele.width;
     var ehgt = this.ele.height;
     
@@ -109,10 +112,10 @@ TrialCounter.prototype.draw = function() {
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'top';
-    this.ctx.fillText('Trial:',ewid-25,0);
+    this.ctx.fillText('Trial:',ewid-40,0);
     
     this.ctx.textBaseline = 'bottom';
-    this.ctx.fillText(this.count+'/'+this.numtrials,ewid-25,ehgt);
+    this.ctx.fillText(this.count+'/'+this.numtrials,ewid-40,ehgt);
     this.ctx.fillStyle = 'white';
     
 };

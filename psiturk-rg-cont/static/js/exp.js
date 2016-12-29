@@ -295,6 +295,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.score.reset();
                 that2.pt.finishInstructions(); // Set participant code to done with instructions
                 that2.trial.loadTrial('trials/'+that2.trlist[0]+'.json');
+		that2.trial.trcounter.display = true;
                 that2.run(that2);
                 return;
             };
