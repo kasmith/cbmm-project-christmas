@@ -1,0 +1,4 @@
+porous_3, homogenize ball position across trials
+porous_2, homogenize ball position across trials
+stopper_3, homogenize ball position across trials
+stopper_4, homogenize ball position across trials

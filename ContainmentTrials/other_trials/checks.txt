@@ -1,0 +1,58 @@
+Loading chipmunk for Linux (64bit) [/usr/local/lib/python2.7/dist-packages/pymunk/libchipmunk64.so]
+Initializing cpSpace - Chipmunk v6.2.0 (Debug Enabled)
+Compile with -DNDEBUG defined to disable debug mode and runtime assertion checks
+All checks clear: other_trials/complex_1_a.ptr
+Hitting the goal takes over 15.0 seconds in reverse; other_trials/complex_1_b.ptr
+Hitting the goal takes over 15.0 seconds in reverse; other_trials/complex_1_c.ptr
+Hitting the goal takes over 15.0 seconds normally; other_trials/complex_2_a.ptr
+Hitting the goal takes over 15.0 seconds normally; other_trials/complex_2_b.ptr
+Hitting the goal takes over 15.0 seconds in reverse; other_trials/complex_2_c.ptr
+Hitting the goal takes over 15.0 seconds in reverse; other_trials/complex_3_a.ptr
+Forwards takes longer than reverse; other_trials/complex_3_b.ptr
+Ball took WAAAY to long to hit the goal in reverse (>100s) other_trials/complex_3_c.ptr
+All checks clear: other_trials/complex_4_a.ptr
+All checks clear: other_trials/porous_1_a.ptr
+All checks clear: other_trials/porous_1_b.ptr
+All checks clear: other_trials/porous_1_c.ptr
+All checks clear: other_trials/porous_2_a.ptr
+All checks clear: other_trials/porous_2_b.ptr
+All checks clear: other_trials/porous_2_c.ptr
+All checks clear: other_trials/porous_3_a.ptr
+All checks clear: other_trials/porous_3_b.ptr
+All checks clear: other_trials/porous_3_c.ptr
+All checks clear: other_trials/porous_4_a.ptr
+All checks clear: other_trials/porous_4_b.ptr
+All checks clear: other_trials/porous_4_c.ptr
+All checks clear: other_trials/porous_5_a.ptr
+All checks clear: other_trials/porous_5_b.ptr
+All checks clear: other_trials/porous_5_c.ptr
+All checks clear: other_trials/size_1_a.ptr
+All checks clear: other_trials/size_1_b.ptr
+All checks clear: other_trials/size_1_c.ptr
+Forwards takes longer than reverse; other_trials/size_2_a.ptr
+Forwards takes longer than reverse; other_trials/size_2_b.ptr
+All checks clear: other_trials/size_2_c.ptr
+All checks clear: other_trials/size_3_a.ptr
+All checks clear: other_trials/size_3_b.ptr
+All checks clear: other_trials/size_3_c.ptr
+All checks clear: other_trials/size_4_a.ptr
+Forwards takes longer than reverse; other_trials/size_4_b.ptr
+Hitting the goal takes over 15.0 seconds normally; other_trials/size_4_c.ptr
+All checks clear: other_trials/size_5_a.ptr
+All checks clear: other_trials/size_5_b.ptr
+All checks clear: other_trials/size_5_c.ptr
+All checks clear: other_trials/stopper_1_a.ptr
+All checks clear: other_trials/stopper_1_b.ptr
+All checks clear: other_trials/stopper_1_c.ptr
+All checks clear: other_trials/stopper_2_a.ptr
+All checks clear: other_trials/stopper_2_b.ptr
+All checks clear: other_trials/stopper_2_c.ptr
+All checks clear: other_trials/stopper_3_a.ptr
+All checks clear: other_trials/stopper_3_b.ptr
+All checks clear: other_trials/stopper_3_c.ptr
+All checks clear: other_trials/stopper_4_a.ptr
+All checks clear: other_trials/stopper_4_b.ptr
+All checks clear: other_trials/stopper_4_c.ptr
+All checks clear: other_trials/stopper_5_a.ptr
+All checks clear: other_trials/stopper_5_b.ptr
+All checks clear: other_trials/stopper_5_c.ptr
