@@ -26,23 +26,25 @@ if __name__ == '__main__':
         try:
             tr = loadTrial(a)
         except:
-            assert False, "Must provide a valid file path to test"
+            assert False, "Must provide a valid file path to test; " + a
 
-        g, tm = check_timing(tr)
+        g, ftm = check_timing(tr)
         if g == TIMEUP:
             print "Ball took WAAAY to long to hit the goal (>100s)", a
         elif g != GREENGOAL:
             print "Ball hits the red goal normally; must hit green;", a
-        elif tm >= MAXTIME:
+        elif ftm >= MAXTIME:
             print "Hitting the goal takes over", MAXTIME, "seconds normally;", a
         else:
             tr = reverse_ball(tr)
-            g, tm = check_timing(tr)
+            g, rtm = check_timing(tr)
             if g == TIMEUP:
                 print "Ball took WAAAY to long to hit the goal in reverse (>100s)", a
             elif g != GREENGOAL:
                 print "Ball hits the red goal in reverse; must hit green;", a
-            elif tm >= MAXTIME:
+            elif rtm >= MAXTIME:
                 print "Hitting the goal takes over", MAXTIME, "seconds in reverse;", a
+            elif ftm > rtm:
+                print "Forwards takes longer than reverse;", a
             else:
                 print "All checks clear:", a
