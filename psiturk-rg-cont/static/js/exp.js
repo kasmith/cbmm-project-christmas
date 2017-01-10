@@ -203,18 +203,19 @@ Experiment.prototype.instructions = function() {
         rkey = 'm';
     }
     
-    var i1 = "In this experiment, you will see a ball bouncing around the screen and will need to predict whether it will go into the red or the green goal. <br> <br> Press the spacebar to see an example of what a table might look like.";
-    var i2 = "But you won't just watch the ball - you will need to predict where it will go. <br> <br> You may have noticed the " + lcol + " 'z' button and the " + rcol + " 'm' button - you should hold down the 'z' key if you think the ball will go in the " + lcol + " goal, ";
-    i2 = i2 + "or the 'm' key if you think the ball will go in the "+rcol+" goal. <br> <br> The longer you hold it down for the correct goal, the more points you will get. <br> <br> Press the spacebar to continue, then hold down the '" + rkey + "' key to see the red counter rise.";
-    var irepeat = "You didn't hold down the '"+rkey+"' key for long enough. <br> <br> Press the spacebar to try again";
-    var irepeat2 = "You didn't hold down the '"+gkey+"' key for long enough. <br> <br> Press the spacebar to try again";
+    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will need to predict whether it will go into the red or the green goal. <br> <br> Press the spacebar to see an example of what a table might look like.";
+    var i2 = "But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after they flash at the bottom of the screen. <br> <br> You may have noticed the " + lcol + " 'z' button and the " + rcol + " 'm' button - you should hold down the 'z' key if you think the ball will go in the " + lcol + " goal, ";
+    i2 = i2 + "or the 'm' key if you think the ball will go in the "+rcol+" goal.  But watch out, the longer you take to make your prediction, the less points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key to see how to get points.";
+    var irepeat = "You didn't press the '"+rkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
+    var irepeat2 = "You didn't press the '"+gkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
     var isizing = 'Please keep the window open and large enough for the experiment';
-    var i3 = "Watch out though - if you hold down the key for the wrong goal, you will lose points. <br> <br> Press the spacebar to continue, then hold down the '"+gkey+"' key to see the green counter rise and demonstrate how you can lose points.";
-    var i4 = "You aren't stuck with one prediction though: you can change your mind during each table by switching from 'z' to 'm' or vice versa. What matters is how long you hold down the key - if you hold it down longer for the correct goal, you ";
-    i4 = i4 + "will gain points, but if you hold it down longer for the other goal, you will lose points. <br> <br> Thus you must strike a balance: you should make a prediction early to earn more points, but if you make it too early and get it wrong, you ";
-    i4 = i4 + "might lose points. <br> <br> Press the spacebar to continue.";
-    var i5 = "Now let's try one last sample table before we start the experiment. <br> <br> Press the spacebar to continue.";
-    var i6 = "You are now done with the instructions. <br> <br> Press the spacebar to start the tables where you will earn points.";
+    var i3 = "Watch out though - if you press the key for the wrong goal, you will lose points. <br> <br> Press the spacebar to continue, then press the '"+gkey+"' key to see how you can lose points.";
+    var i4 = "One extra detail: in some cases the ball won't move at all! In these cases yo should make your best guess of where the ball will land, without seeing it move.";
+    i4 = i4 + "<br> <br> Press the spacebar to continue.";
+    var i5 = "Now let's try a few sample tables before we start the experiment. <br> <br> Press the spacebar to continue.";
+    var i6 = "A couple more for practice... <br> <br> Press the spacebar to continue.";
+    var i7 = "As you just saw, remember that sometimes the ball does not move. Make your best guess of where it will end. <br> <br> One more practice round. <br> <br> Press the spacebar to continue.";
+    var i8 = "You are now done with the instructions. <br> <br> Press the spacebar to start the tables where you will earn points.";
     // Intermediate functions to do recursive stuff in instructions
     
     var that2 = this;
@@ -232,7 +233,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i2,'black','white',runS2,true);
                 return;
             }
-        },that2.loaded.tconds[that2.tridx],false,true);
+        },'forward',false,true);
     };
     
     runS2 = function() {
@@ -253,7 +254,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i3,'black','white',runS3,true);
                 return;
             }
-        },that2.loaded.tconds[that2.tridx],false);
+        },'forward',false);
     };
     
     runS3 = function() {
@@ -271,20 +272,72 @@ Experiment.prototype.instructions = function() {
             }
             else {
                 that2.trial.score.reset();
-                that2.trial.showinstruct(i4,'black','white',function() {
-                    that2.trial.showinstruct(i5,'black','white',runS4,true);
-                }, true);
+                that2.trial.showinstruct(i4,'black','white',runS4,true);
                 return;
             }
-        },that2.loaded.tconds[that2.tridx],false);
+        },'forward',false);
     };
     
     runS4 = function() {
-        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
                 that2.trial.showinstruct(isizing,'black','white',runS4,true);
+                that2.badtrial = false;
+                return;
+            }
+            else {
+                that2.trial.score.reset();
+                that2.trial.showinstruct(i5,'black','white',runS5,true);
+                return;
+            };
+            
+        },'static',false);
+    };
+
+    runS5 = function() {
+        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.badtrial = false;
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
+            if (that2.badtrial) {
+                that2.trial.showinstruct(isizing,'black','white',runS5,true);
+                that2.badtrial = false;
+                return;
+            }
+            else {
+                that2.trial.score.reset();
+                that2.trial.showinstruct(i6,'black','white',runS6,true);
+                return;
+            };
+            
+        },'forward',false);
+    };
+
+    runS6 = function() {
+        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.badtrial = false;
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
+            if (that2.badtrial) {
+                that2.trial.showinstruct(isizing,'black','white',runS6,true);
+                that2.badtrial = false;
+                return;
+            }
+            else {
+                that2.trial.score.reset();
+                that2.trial.showinstruct(i7,'black','white',runS7,true);
+                return;
+            };
+            
+        },'static',false);
+    };
+
+    runS7 = function() {
+        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.badtrial = false;
+        that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
+            if (that2.badtrial) {
+                that2.trial.showinstruct(isizing,'black','white',runS7,true);
                 that2.badtrial = false;
                 return;
             }
@@ -297,8 +350,9 @@ Experiment.prototype.instructions = function() {
                 return;
             };
             
-        },that2.loaded.tconds[that2.tridx],false);
+        },'reverse',false);
     };
+
 
     that2.trial.showinstruct(i1,'black','white', runS1, true );
 
