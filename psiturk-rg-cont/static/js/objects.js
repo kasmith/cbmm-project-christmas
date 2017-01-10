@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,7 +30,7 @@ var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
           window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
 
 /*
- * 
+ *
  * @param {num} x1: x coordinate of point 1
  * @param {num} y1: y coordinate of point 1
  * @param {num} x2: x coordinate of point 2
@@ -45,7 +45,7 @@ edistwithin = function(x1,y1,x2,y2,r) {
 };
 
 /**
- * 
+ *
  * @param {type} px - x position of center of ball
  * @param {type} py - y position of center of ball
  * @param {type} vx - x velocity (px/s)
@@ -55,10 +55,10 @@ edistwithin = function(x1,y1,x2,y2,r) {
  * @returns {Ball}
  */
 Ball = function(px, py, vx, vy, rad, color, elast, space) {
-    
+
     if (typeof(color)==='undefined') color = 'rgb(0,0,255)';
     if (typeof(elast)==='undefined') elast = 1.;
-    
+
     // Record inputs
     var pos = new cp.Vect(px,py);
     var vel = new cp.Vect(vx,vy);
@@ -66,7 +66,7 @@ Ball = function(px, py, vx, vy, rad, color, elast, space) {
     this.space = space;
     this.col = color;
     this.elast = elast;
-    
+
     // Add new body to chipmunk space
     var mom = cp.momentForCircle(1,0,this.rad,cp.vzero);
     this.body = new cp.Body(1.0, mom);
@@ -104,7 +104,7 @@ Ball.prototype.draw = function (ctx) {
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
     ctx.arc(pos.x, pos.y, this.rad, 0, 2*Math.PI,true);
-    ctx.fill();  
+    ctx.fill();
 };
 Ball.prototype.clone = function(newspace) {
     var pos = this.getpos();
@@ -113,7 +113,7 @@ Ball.prototype.clone = function(newspace) {
 };
 
 /*
- * 
+ *
  * @param {type} rect: any type of object that has top, bottom, left, right
  *                     (e.g., walls, occluders, goals)
  * @returns {bool} if there's an intersection
@@ -125,11 +125,11 @@ Ball.prototype.intersectRect= function(rect) {
     var bottom = pos.y+r;
     var right = pos.x+r;
     var left = pos.x-r;
-    
+
     // Collision between bounding rectangles
     if (!(rect.left > right || rect.right < left ||
             rect.top > bottom || rect.bottom < top)) {
-        
+
         // Cheap non-distance calcs
         //  1) if a vertical collision and center is in, it's a hit
         if ((bottom > rect.top || top < rect.bottom) &&
@@ -137,13 +137,13 @@ Ball.prototype.intersectRect= function(rect) {
         // 2) if a horizontal collision and center is in vert, it's a hit
         if ((right > rect.left || left < rect.right) &&
                 pos.y > rect.top && pos.y < rect.bottom) {return true;}
-        
+
         // Otherwise, check if center is less than r from edge points
         if (edistwithin(pos.x,pos.y,rect.left,rect.top,r)) return true;
         if (edistwithin(pos.x,pos.y,rect.right,rect.top,r)) return true;
         if (edistwithin(pos.x,pos.y,rect.left,rect.bottom,r)) return true;
         if (edistwithin(pos.x,pos.y,rect.right,rect.bottom,r)) return true;
-        
+
         // Passed all checks
         return false;
     }
@@ -151,7 +151,7 @@ Ball.prototype.intersectRect= function(rect) {
 };
 
 /**
- * 
+ *
  * @param {int} top
  * @param {int} left
  * @param {int} bottom
@@ -167,9 +167,9 @@ Wall = function(left, top, right, bottom,color,elast, space) {
     this.space = space;
     this.col = color;
     this.elast = elast;
-    
+
     this.bb = new cp.bb(left,top,right,bottom);
-    
+
     this.shape = this.space.addShape(new cp.BoxShape2(this.space.staticBody, this.bb));
     this.shape.setElasticity(elast);
 };
@@ -207,7 +207,7 @@ Goal = function(left,top,right,bottom,color,onreturn) {
     this.left = left;
     this.bottom = bottom;
     this.right = right;
-   
+
     this.onret = onreturn;
     if (typeof(color)==='undefined') color = 'rgba(0,0,0,0)';
     this.color = color;
@@ -225,32 +225,32 @@ Goal.prototype.clone = function() {
 Table = function(name,dimx, dimy, canvas, closedends,backgroundcolor, timeres) {
     // Defaults to closed off
     if (typeof(closedends)==='undefined') closedends = [true,true,true,true];
-    
+
     if (typeof(timeres)!=='undefined') this.tres = timeres;
     else this.tres = 1/1000.;
-    
+
     if (typeof(backgroundcolor==='undefined')) this.bkc = 'rgb(255,255,255)';
     else this.bkc = backgroundcolor;
-    
+
     this.name = name;
-    
+
     this.dims = new cp.Vect(dimx,dimy);
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    
+
     this.onstep = function() {};
     this.time = 0.;
     this.clocktime = new Date().getTime();
-    
+
     this.space = new cp.Space();
     this.ball;
     this.walls = [];
     this.goals = [];
     this.occs = [];
     this.ces = closedends;
-    
+
     var ce;
-    
+
     this.ends = [];
     if (closedends[0]) {
         ce = this.space.addShape(new cp.SegmentShape(this.space.staticBody,cp.v(-1,-10),cp.v(dimx+1,-10),10));
@@ -308,9 +308,9 @@ Table.prototype.addgoal = function(left,top,right,bottom,color,onreturn) {
 Table.prototype.draw = function() {
     var oldcompop = this.ctx.globalCompositeOperation;
     this.ctx.globalCompositeOperation = 'source-over';
-    
+
     var w, g, o;
-    
+
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0,0,this.dims.x,this.dims.y);
     if (typeof(this.ball)!=='undefined') this.ball.draw(this.ctx);
@@ -323,7 +323,7 @@ Table.prototype.draw = function() {
         g = this.goals[i];
         g.draw(this.ctx);
     }
-    
+
     for (var i = 0; i < this.occs.length; i++) {
         o = this.occs[i];
         o.draw(this.ctx);
@@ -388,7 +388,7 @@ preloadTrial = function(jsonfile) {
         },
         error: function(req) {
             alert('Error loading JSON file; ' + req.status);
-            failure = true; 
+            failure = true;
         }
     });
     return trdat.data;
@@ -399,7 +399,7 @@ TrialList = function(triallist, trialpath) {
     this.tnms = triallist.map(x => x[0]);
     this.tconds = triallist.map(x => x[1]);
     this.trials = [];
-    
+
     for (var i = 0; i < this.tnms.length; i++) {
         this.trials[i] = preloadTrial(trialpath + '/' + this.tnms[i]);
     }
@@ -419,40 +419,48 @@ TrialList.prototype.loadFromData = function(d, canvas) {
         ces[d.ClosedEnds[i]-1] = true;
     }
     var tab = new Table(d.Name,tdims[0],tdims[1],canvas,ces,bkc);
-    
+
     // Add the ball
     var b = d.Ball;
     var bcol = "rgba("+b[3][0]+","+b[3][1]+","+b[3][2]+","+b[3][3]+")";
     tab.addball(b[0][0],b[0][1],b[1][0],b[1][1],b[2],bcol,b[4]);
-    
+
     var w, wcol, o, ocol, g, gcol;
-    
+
     // Add walls
     for (i=0;i<d.Walls.length;i++) {
         w = d.Walls[i];
         wcol = "rgba("+w[2][0]+","+w[2][1]+","+w[2][2]+","+w[2][3]+")";
         tab.addwall(w[0][0],w[0][1],w[1][0],w[1][1],wcol,w[3]);
     }
-    
+
     // Add occluders
     for (i=0;i<d.Occluders.length;i++) {
         o = d.Occluders[i];
         ocol = "rgba("+o[2][0]+","+o[2][1]+","+o[2][2]+","+o[2][3]+")";
         tab.addoccluder(o[0][0],o[0][1],o[1][0],o[1][1],ocol);
     }
-    
+
     // Add goals
     for (i=0;i<d.Goals.length;i++) {
         g = d.Goals[i];
         gcol = "rgba("+g[3][0]+","+g[3][1]+","+g[3][2]+","+g[3][3]+")";
         tab.addgoal(g[0][0],g[0][1],g[1][0],g[1][1],gcol,g[2]);
     }
-    
+
     // AbnormWalls and Paddles not implemented (yet)
     if (d.AbnormWalls.length !== 0) alert('AbnormWalls not supported');
     if (d.Paddle) alert('Paddle not supported');
-    
+
     return tab;
+};
+
+makeColor = function(col) {
+    if (col.length === 3) {
+        return "rgba("+col[0]+","+col[1]+","+col[2]+",255)";
+    } else {
+        return "rgba("+col[0]+","+col[1]+","+col[2]+","+col[3]+")";
+    }
 };
 
 loadTrial = function(jsonfile,canvas) {
@@ -467,53 +475,53 @@ loadTrial = function(jsonfile,canvas) {
         },
         error: function(req) {
             alert('Error loading JSON file; ' + req.status);
-            failure = true; 
+            failure = true;
         }
     });
     if (failure) return 0;
     var d = trdat.data;
-    
+
     // Make a new table
     var tdims = d.Dims;
     var ces = [false,false,false,false];
     var bkar = d.BKColor;
-    var bkc = "rgba("+bkar[0]+","+bkar[1]+","+bkar[2]+","+bkar[3]+")";
+    var bkc = makeColor(bkar);
     for (i=0;i<d.ClosedEnds.length;i++) {
         ces[d.ClosedEnds[i]-1] = true;
     }
     var tab = new Table(d.Name,tdims[0],tdims[1],canvas,ces,bkc);
-    
+
     // Add the ball
     var b = d.Ball;
-    var bcol = "rgba("+b[3][0]+","+b[3][1]+","+b[3][2]+","+b[3][3]+")";
+    var bcol = makeColor(b[3]);
     tab.addball(b[0][0],b[0][1],b[1][0],b[1][1],b[2],bcol,b[4]);
-    
+
     var w, wcol, o, ocol, g, gcol;
-    
+
     // Add walls
     for (i=0;i<d.Walls.length;i++) {
         w = d.Walls[i];
-        wcol = "rgba("+w[2][0]+","+w[2][1]+","+w[2][2]+","+w[2][3]+")";
+        wcol = makeColor(w[2]);
         tab.addwall(w[0][0],w[0][1],w[1][0],w[1][1],wcol,w[3]);
     }
-    
+
     // Add occluders
     for (i=0;i<d.Occluders.length;i++) {
         o = d.Occluders[i];
-        ocol = "rgba("+o[2][0]+","+o[2][1]+","+o[2][2]+","+o[2][3]+")";
+        ocol = makeColor(o[2]);
         tab.addoccluder(o[0][0],o[0][1],o[1][0],o[1][1],ocol);
     }
-    
+
     // Add goals
     for (i=0;i<d.Goals.length;i++) {
         g = d.Goals[i];
-        gcol = "rgba("+g[3][0]+","+g[3][1]+","+g[3][2]+","+g[3][3]+")";
+        gcol = makeColor(g[3]);
         tab.addgoal(g[0][0],g[0][1],g[1][0],g[1][1],gcol,g[2]);
     }
-    
+
     // AbnormWalls and Paddles not implemented (yet)
     if (d.AbnormWalls.length !== 0) alert('AbnormWalls not supported');
     if (d.Paddle) alert('Paddle not supported');
-    
+
     return tab;
 };
