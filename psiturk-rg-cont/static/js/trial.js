@@ -464,7 +464,7 @@ Trial.prototype.isswitched = function() {
     return this.goalswitched;
 };
 
-Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,randomizegoal,showscore,motioncond) {
+Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,motioncond,randomizegoal,showscore) {
     if (typeof(randomizegoal) === 'undefined') randomizegoal = true;
     if (randomizegoal) {
         if (Math.random() < 0.5) 
@@ -477,10 +477,16 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback
         }
     }
     else this.goalswitched = false;
-    // generate random motion condition if undefined, one of {-1,0,1}
-    if (typeof(motioncond) === 'undefined') 
-        motioncond = Math.floor(Math.random()*3)-1; 
-    this.motioncond = motioncond;
+
+    // assign motion condition value
+    if (motioncond === 'static')
+        this.motioncond = 0;
+    else if (motioncond === 'forward')
+        this.motioncond = 1;
+    else if (motioncond === 'reverse')
+        this.motioncond = -1;
+    else // generate random motion condition if undefined, one of {-1,0,1}
+        this.motioncond = Math.floor(Math.random()*3)-1; 
 
     var that = this;
     var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};

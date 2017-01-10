@@ -7,7 +7,6 @@
 // Initalize psiturk object
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
-
 psiTurk.preloadPages(["stage.html"]);
 
 

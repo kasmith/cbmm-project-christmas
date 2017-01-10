@@ -124,14 +124,14 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
 
 Experiment.prototype.startTrials = function(me) {
     //this.trial.loadTrial('trials/'+this.trlist[0]+'.json');
-    this.trial.loadFromTList(this.trlist[0][0],this.loaded);
+    this.trial.loadFromTList(this.loaded.tnms[0],this.loaded);
 };
 
 Experiment.prototype.run = function(me) {
     me.badtrial = false;
     me.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
 	me.recordTrial(me);
-    });
+    }, me.loaded.tconds[me.tridx]);
 };
 
 Experiment.prototype.nextTrial = function(me) {
@@ -142,12 +142,9 @@ Experiment.prototype.nextTrial = function(me) {
         return;
     }
     me.trial.trcounter.incr();
-    console.info(me.trlist.length);
-    console.info(me.tridx);
-    // XXX Will always load same trial (switch back after debugging)
-    me.trial.loadTrial('trials/RTr_Bl1_0.json');
+    
     //me.trial.loadTrial('trials/'+me.trlist[me.tridx]+'.json');
-    //me.trial.loadFromTList(me.trlist[me.tridx][0],me.loaded);
+    me.trial.loadFromTList(me.loaded.tnms[me.tridx],me.loaded);
     me.run(me);
 };
 
@@ -235,7 +232,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i2,'black','white',runS2,true);
                 return;
             }
-        },false,true);
+        },that2.loaded.tconds[that2.tridx],false,true);
     };
     
     runS2 = function() {
@@ -256,7 +253,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i3,'black','white',runS3,true);
                 return;
             }
-        },false);
+        },that2.loaded.tconds[that2.tridx],false);
     };
     
     runS3 = function() {
@@ -279,7 +276,7 @@ Experiment.prototype.instructions = function() {
                 }, true);
                 return;
             }
-        },false);
+        },that2.loaded.tconds[that2.tridx],false);
     };
     
     runS4 = function() {
@@ -294,13 +291,13 @@ Experiment.prototype.instructions = function() {
             else {
                 that2.trial.score.reset();
                 that2.pt.finishInstructions(); // Set participant code to done with instructions
-                that2.trial.loadTrial('trials/'+that2.trlist[0][0]+'.json');
+                that2.trial.loadTrial('trials/'+that2.loaded.tnms[0]);
 		that2.trial.trcounter.display = true;
                 that2.run(that2);
                 return;
             };
             
-        },false);
+        },that2.loaded.tconds[that2.tridx],false);
     };
 
     that2.trial.showinstruct(i1,'black','white', runS1, true );
