@@ -100,7 +100,7 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
         url: triallist,
         async: false,
         success: function(data) {
-            that.trlist = data;
+            that.trlist = data[that.pt.taskdata.get('condition')];
         },
         error: function(req) {
             throw new Error('Failure to load trial list file');
@@ -124,7 +124,7 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
 
 Experiment.prototype.startTrials = function(me) {
     //this.trial.loadTrial('trials/'+this.trlist[0]+'.json');
-    this.trial.loadFromTList(this.trlist[0],this.loaded);
+    this.trial.loadFromTList(this.trlist[0][0],this.loaded);
 };
 
 Experiment.prototype.run = function(me) {
@@ -147,7 +147,7 @@ Experiment.prototype.nextTrial = function(me) {
     // XXX Will always load same trial (switch back after debugging)
     me.trial.loadTrial('trials/RTr_Bl1_0.json');
     //me.trial.loadTrial('trials/'+me.trlist[me.tridx]+'.json');
-    //me.trial.loadFromTList(me.trlist[me.tridx],me.loaded);
+    //me.trial.loadFromTList(me.trlist[me.tridx][0],me.loaded);
     me.run(me);
 };
 
@@ -294,7 +294,7 @@ Experiment.prototype.instructions = function() {
             else {
                 that2.trial.score.reset();
                 that2.pt.finishInstructions(); // Set participant code to done with instructions
-                that2.trial.loadTrial('trials/'+that2.trlist[0]+'.json');
+                that2.trial.loadTrial('trials/'+that2.trlist[0][0]+'.json');
 		that2.trial.trcounter.display = true;
                 that2.run(that2);
                 return;

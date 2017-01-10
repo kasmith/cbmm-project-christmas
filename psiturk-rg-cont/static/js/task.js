@@ -17,7 +17,7 @@ psiTurk.preloadPages(["stage.html"]);
 $(window).load( function(){
     psiTurk.showPage("stage.html");
     $('.field').hide(0);
-    exp = new Experiment('trials/TrList.json','table','lbutton','rbutton','score','trialcounter',psiTurk);
+    exp = new Experiment('trials/ConditionList.json','table','lbutton','rbutton','score','trialcounter',psiTurk);
     ws = new windowsizer(1010,755,exp);
     ws.checkSize(ws);
     $(window).resize(function() {ws.checkSize(ws);});

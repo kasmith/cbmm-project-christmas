@@ -394,13 +394,14 @@ preloadTrial = function(jsonfile) {
     return trdat.data;
 };
 
-TrialList = function(trialnames, trialpath) {
-    assert(trialnames instanceof Array, "trialnames must be an array");
-    this.tnms = trialnames;
+TrialList = function(triallist, trialpath) {
+    assert(triallist instanceof Array, "triallist must be an array");
+    this.tnms = triallist.map(x => x[0]);
+    this.tconds = triallist.map(x => x[1]);
     this.trials = [];
     
     for (var i = 0; i < this.tnms.length; i++) {
-        this.trials[i] = preloadTrial(trialpath + '/' + this.tnms[i] + '.json');
+        this.trials[i] = preloadTrial(trialpath + '/' + this.tnms[i]);
     }
 };
 
