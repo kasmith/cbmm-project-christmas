@@ -414,7 +414,7 @@ TrialList.prototype.loadFromData = function(d, canvas) {
     var tdims = d.Dims;
     var ces = [false,false,false,false];
     var bkar = d.BKColor;
-    var bkc = "rgba("+bkar[0]+","+bkar[1]+","+bkar[2]+","+bkar[3]+")";
+    var bkc = makeColor(bkar);
     for (i=0;i<d.ClosedEnds.length;i++) {
         ces[d.ClosedEnds[i]-1] = true;
     }
@@ -422,7 +422,7 @@ TrialList.prototype.loadFromData = function(d, canvas) {
 
     // Add the ball
     var b = d.Ball;
-    var bcol = "rgba("+b[3][0]+","+b[3][1]+","+b[3][2]+","+b[3][3]+")";
+    var bcol = makeColor(b[3]);
     tab.addball(b[0][0],b[0][1],b[1][0],b[1][1],b[2],bcol,b[4]);
 
     var w, wcol, o, ocol, g, gcol;
@@ -430,21 +430,21 @@ TrialList.prototype.loadFromData = function(d, canvas) {
     // Add walls
     for (i=0;i<d.Walls.length;i++) {
         w = d.Walls[i];
-        wcol = "rgba("+w[2][0]+","+w[2][1]+","+w[2][2]+","+w[2][3]+")";
+        wcol = makeColor(w[2]);
         tab.addwall(w[0][0],w[0][1],w[1][0],w[1][1],wcol,w[3]);
     }
 
     // Add occluders
     for (i=0;i<d.Occluders.length;i++) {
         o = d.Occluders[i];
-        ocol = "rgba("+o[2][0]+","+o[2][1]+","+o[2][2]+","+o[2][3]+")";
+        ocol = makeColor(o[2]);
         tab.addoccluder(o[0][0],o[0][1],o[1][0],o[1][1],ocol);
     }
 
     // Add goals
     for (i=0;i<d.Goals.length;i++) {
         g = d.Goals[i];
-        gcol = "rgba("+g[3][0]+","+g[3][1]+","+g[3][2]+","+g[3][3]+")";
+        gcol = makeColor(g[3]);
         tab.addgoal(g[0][0],g[0][1],g[1][0],g[1][1],gcol,g[2]);
     }
 
@@ -453,14 +453,6 @@ TrialList.prototype.loadFromData = function(d, canvas) {
     if (d.Paddle) alert('Paddle not supported');
 
     return tab;
-};
-
-makeColor = function(col) {
-    if (col.length === 3) {
-        return "rgba("+col[0]+","+col[1]+","+col[2]+",255)";
-    } else {
-        return "rgba("+col[0]+","+col[1]+","+col[2]+","+col[3]+")";
-    }
 };
 
 loadTrial = function(jsonfile,canvas) {
@@ -525,3 +517,14 @@ loadTrial = function(jsonfile,canvas) {
 
     return tab;
 };
+
+// Utility function to adjust for data without alpha channel
+makeColor = function(col) {
+    if (col.length === 3) {
+        return "rgba("+col[0]+","+col[1]+","+col[2]+",255)";
+    } else {
+        return "rgba("+col[0]+","+col[1]+","+col[2]+","+col[3]+")";
+    }
+};
+
+
