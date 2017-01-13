@@ -214,10 +214,13 @@ Trial.prototype.loadFromTList = function(trname, trlist) {
     this.response = NORESPONSE;
     this.resptime = -1;
 };
-Trial.prototype.draw = function() {
+Trial.prototype.draw = function(displayButtons) {
+    if (displayButtons === 'undefined')
+        displayButtons = true;
+
     this.tb.draw();
-    this.lbtn.draw();
-    this.rbtn.draw();
+    this.lbtn.draw(displayButtons);
+    this.rbtn.draw(displayButtons);
     this.score.draw();
     this.trcounter.draw();
 };
@@ -344,12 +347,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
         interid = setInterval(function () {
             pev = that.tb.step(dt,maxtime);
 
-	    //TODO Move this all into trial draw() with parameter for buttons
-            that.tb.draw();
-            that.score.draw();
-            that.trcounter.draw();
-            that.lbtn.draw(true);
-            that.rbtn.draw(true);
+            that.draw(true);
 
             if (pev !== 0) {
                 assert(pev !== TIMEUP, "Oddly, your trial ran too long");
@@ -367,7 +365,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                     score = Math.round(Math.max(Math.min(score,100),0));
                 }
                 that.score.add(score);
-                that.draw();
+                that.draw(true);
                 that.writenewscore(score,showscore);
                 that.done = true;
                 that.lastscore = score;
@@ -387,13 +385,11 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
     // function to be called after trial display, to wait for response
     var waitresponse = function() {
         // Flash something to sinalize beginning of response period
-        that.lbtn.draw(false);
-        that.rbtn.draw(false);
+        that.draw(false);
 
         var timeoutid;
         var start = new Date();
         that.keyhandler.setpress(function(k) {
-            // TODO Verify double press? Or just record first key pressed?
             if (k===77) { 
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
@@ -411,7 +407,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                 finishtrial();
             }
         });
-        // TODO Fix race condition, multiple calls to finishtrial
+        // Possible race condition, multiple calls to finishtrial
         timeoutid = setTimeout(finishtrial, responsetime*1000);
     };
 
@@ -422,12 +418,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
     interid = setInterval(function () {
         pev = that.tb.step(dt,displaytime);
 
-	//TODO Move this all into trial draw() with parameter for buttons
-        that.tb.draw();
-        that.score.draw();
-        that.trcounter.draw();
-        that.lbtn.draw(true);
-        that.rbtn.draw(true);
+        that.draw(true);
 
         if (pev !== 0) {
             assert(pev === TIMEUP, "Oddly, your trial ended too soon");
@@ -492,3 +483,4 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback
     var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};
     this.showinstruct('Press the spacebar to begin','black','lightgrey',runfn);
 };
+

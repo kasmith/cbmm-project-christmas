@@ -154,6 +154,7 @@ Experiment.prototype.recordTrial = function(me) {
     var goalsw = me.trial.isswitched();
     var resp = me.trial.response;
     var resptime = me.trial.resptime;
+    var expcondition = this.pt.taskdata.get('condition');
     
     assert(me.trial.done, 'Cannot record trial that is not finished');
 
@@ -163,8 +164,7 @@ Experiment.prototype.recordTrial = function(me) {
     // Insert psiturk recording code here
     //console.log(resp);
     //console.log(realgoal);
-    //TODO Record experimental condition? Or is it automatic? (0-8 condition)
-    me.pt.recordTrialData([trname,me.tridx,motioncond,goalsw,resp,sc,realgoal,me.badtrial]);
+    me.pt.recordTrialData([trname,me.tridx,motioncond,goalsw,resp,sc,realgoal,me.badtrial, expcondition]);
     
     var bi;
     if (me.badtrial) {
@@ -370,3 +370,4 @@ function main() {
     
 };
 */
+
