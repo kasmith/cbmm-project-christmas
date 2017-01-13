@@ -204,15 +204,13 @@ Experiment.prototype.instructions = function() {
         rkey = 'm';
     }
     
-    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will need to predict whether it will go into the red or the green goal. <br> <br> Press the spacebar to see an example of what a table might look like.";
-    var i2 = "But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after they flash at the bottom of the screen. <br> <br> You may have noticed the " + lcol + " 'z' button and the " + rcol + " 'm' button - you should hold down the 'z' key if you think the ball will go in the " + lcol + " goal, ";
-    i2 = i2 + "or the 'm' key if you think the ball will go in the "+rcol+" goal.  But watch out, the longer you take to make your prediction, the less points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key to see how to get points.";
+    var isizing = 'Please keep the window open and large enough for the experiment';
+    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will need to predict whether it will go into the red or the green goal. <br> <br> There will be a " + lcol + " 'z' button and a " + rcol + " 'm' button at the bottom of the screen. You should press the 'z' key if you think the ball will go in the " + lcol + " goal, or the 'm' key if you think the ball will go in the "+rcol+" goal. <br> <br> But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after the keys flash at the bottom of the screen. <br> <br> Press the spacebar to see an example of what a table might look like.";
+    var i2 = "But watch out, the longer you take to make your prediction by pressing the button after, the less points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to see how to gain points.";
     var irepeat = "You didn't press the '"+rkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
     var irepeat2 = "You didn't press the '"+gkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
-    var isizing = 'Please keep the window open and large enough for the experiment';
     var i3 = "Watch out though - if you press the key for the wrong goal, you will lose points. <br> <br> Press the spacebar to continue, then press the '"+gkey+"' key to see how you can lose points.";
-    var i4 = "One extra detail: in some cases the ball won't move at all! In these cases yo should make your best guess of where the ball will land, without seeing it move.";
-    i4 = i4 + "<br> <br> Press the spacebar to continue.";
+    var i4 = "One extra detail: in some cases the ball won't move at all! In these cases you should make your best guess of where the ball will land, without seeing it move. Let's look at one example. <br> <br> Press the spacebar to continue.";
     var i5 = "Now let's try a few sample tables before we start the experiment. <br> <br> Press the spacebar to continue.";
     var i6 = "A couple more for practice... <br> <br> Press the spacebar to continue.";
     var i7 = "As you just saw, remember that sometimes the ball does not move. Make your best guess of where it will end. <br> <br> One more practice round. <br> <br> Press the spacebar to continue.";
@@ -316,7 +314,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS6 = function() {
-        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.trial.loadTrial('trials/InstTr3.json');
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -334,7 +332,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS7 = function() {
-        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.trial.loadTrial('trials/InstTr4.json');
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
