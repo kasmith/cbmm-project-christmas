@@ -92,6 +92,11 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
 
     this.pt = ptobj;
 
+    // Load in the trial object
+    this.rol = Math.random() < 0.5;
+    this.trial = new Trial(table,leftctr,rightctr,score,trcounter,this.rol);
+    this.trial.showinstruct("Please wait for all of the data to load.", 'black','white', function() {return;}, true);
+
     // Load in the list of trials to use & shuffle them
     var that = this;
     var lst = new ajaxStruct();
@@ -113,9 +118,6 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
 
     this.badtrial = false; // Holder for if window is too small or minimzied
 
-    // Load in the trial object
-    this.rol = Math.random() < 0.5;
-    this.trial = new Trial(table,leftctr,rightctr,score,trcounter,this.rol);
     this.trial.trcounter.setnumtrials(this.trlist.length);
 
     this.pt.recordUnstructuredData('RedOnLeft',this.rol);
