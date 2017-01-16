@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,29 +25,29 @@ windowsizer = function(minx, miny,exp) {
     this.tbshown = false;
     this.replaced = false;
     this.exp = exp;
-    
+
     this.checkSize = function(wsme) {
         var maxWidth = $(window).width(),
             maxHeight = $(window).height();
-    
+
         $("#textfield").width(Math.min(1000,maxWidth));
-        
+
         if ((minx > maxWidth) || (miny > maxHeight)) {
             wsme.exp.badtrial = true;
             if ($("#table").is(":visible")) {
                 $("#table").hide(0);
                 wsme.tbshown = true;
             }
-            
+
             if (!wsme.replaced) {
                 wsme.exp.trial.replaceText('Your window is too small for this experiment. Please make it larger.');
                 wsme.replaced = true;
             }
-            
+
             $("#textfield").show(0);
             return;
         }
-        
+
         if (wsme.replaced) {
             wsme.exp.trial.restoreText();
             wsme.replaced = false;
@@ -56,10 +56,10 @@ windowsizer = function(minx, miny,exp) {
             $("#table").show(0);
             $("#textfield").hide(0);
         }
-        
+
         wsme.tbshown = false;
-        
-      
+
+
     };
 };
 
@@ -89,9 +89,9 @@ RESPONSE_TIME = 2.5;
 MAX_TIME = 20;
 
 Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, ptobj) {
-    
+
     this.pt = ptobj;
-    
+
     // Load in the list of trials to use & shuffle them
     var that = this;
     var lst = new ajaxStruct();
@@ -108,18 +108,18 @@ Experiment = function(triallist, table, leftctr, rightctr, score, trcounter, pto
     });
     this.trlist = shuffle(this.trlist);
     this.tridx = 0;
-    
+
     this.loaded = new TrialList(this.trlist, 'trials');
-    
+
     this.badtrial = false; // Holder for if window is too small or minimzied
-    
+
     // Load in the trial object
     this.rol = Math.random() < 0.5;
     this.trial = new Trial(table,leftctr,rightctr,score,trcounter,this.rol);
     this.trial.trcounter.setnumtrials(this.trlist.length);
-    
+
     this.pt.recordUnstructuredData('RedOnLeft',this.rol);
-    
+
 };
 
 Experiment.prototype.startTrials = function(me) {
@@ -142,7 +142,7 @@ Experiment.prototype.nextTrial = function(me) {
         return;
     }
     me.trial.trcounter.incr();
-    
+
     //me.trial.loadTrial('trials/'+me.trlist[me.tridx]+'.json');
     me.trial.loadFromTList(me.loaded.tnms[me.tridx],me.loaded);
     me.run(me);
@@ -155,7 +155,7 @@ Experiment.prototype.recordTrial = function(me) {
     var resp = me.trial.response;
     var resptime = me.trial.resptime;
     var expcondition = this.pt.taskdata.get('condition');
-    
+
     assert(me.trial.done, 'Cannot record trial that is not finished');
 
     var sc = me.trial.lastscore;
@@ -165,14 +165,14 @@ Experiment.prototype.recordTrial = function(me) {
     //console.log(resp);
     //console.log(realgoal);
     me.pt.recordTrialData([trname,me.tridx,motioncond,goalsw,resp,sc,realgoal,me.badtrial, expcondition]);
-    
+
     var bi;
     if (me.badtrial) {
         bi = 'Please keep the window open, on top of the screen, and large enough to see everything';
         me.trial.showinstruct(bi,'black','white',function() {me.nextTrial(me);});
         return;
     }
-    
+
     me.pt.saveData({
         error: function() {console.log('Error recording data');}
     });
@@ -186,12 +186,12 @@ Experiment.prototype.endExp = function() {
 };
 
 Experiment.prototype.instructions = function() {
-    
+
     var itr1 = 'trials/InstTr1.json';
     var itr2 = 'trials/InstTr2.json';
-    
+
     var lcol, rcol, rkey, gkey;
-    
+
     if (this.rol) {
         lcol = 'red';
         rcol = 'green';
@@ -203,20 +203,35 @@ Experiment.prototype.instructions = function() {
         gkey = 'z';
         rkey = 'm';
     }
-    
+
     var isizing = 'Please keep the window open and large enough for the experiment';
-    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will need to predict whether it will go into the red or the green goal. <br> <br> There will be a " + lcol + " 'z' button and a " + rcol + " 'm' button at the bottom of the screen. You should press the 'z' key if you think the ball will go in the " + lcol + " goal, or the 'm' key if you think the ball will go in the "+rcol+" goal. But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after the keys flash on at the bottom of the screen. <br> <br> Press the spacebar to see an example.";
-    var i2 = "But watch out, the longer you take to make your prediction by pressing the button after, the less points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to see how to gain points.";
-    var irepeat = "You didn't press the '"+rkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
-    var irepeat2 = "You didn't press the '"+gkey+"' key at the right moment. <br> <br> Press the spacebar to try again";
+
+    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop.<br><br>";
+    i1 += "You will need to predict whether it would have gone into the red or the green goal if it had continued to move on its trajectory.<br><br>";
+    i1 += "Press the spacebar to continue.";
+
+    var i1a = "There will be a " + lcol + " 'z' button and a " + rcol + " 'm' button at the bottom of the screen. You should press the 'z' key ";
+    i1a += " if you think the ball will go in the " + lcol + " goal, or the 'm' key if you think the ball will go in the "+rcol+" goal.<br><br>";
+    i1a += "But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after the keys flash on at the bottom of the screen. <br> <br>";
+    i1a += "Once you have made your prediction, you will see the full path of the ball.<br><br>Press the spacebar to see an example.";
+
+    var i2 = "But watch out, the longer you take to make your prediction by pressing the button after, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to earn some points.";
+
+    var irepeat = "You didn't press the '"+rkey+"' key fast enough. <br> <br> Press the spacebar to try again";
+    var irepeat2 = "You didn't press the '"+gkey+"' key. <br> <br> Press the spacebar to try again";
+
     var i3 = "Watch out though - if you press the key for the wrong goal, you will lose points. <br> <br> Press the spacebar to continue, then press the '"+gkey+"' key to see how you can lose points.";
-    var i4 = "One extra detail: in some cases the ball won't move at all! In these cases you should make your best guess of where the ball will land, without seeing it move. Let's look at one example. <br> <br> Press the spacebar to continue.";
+
+    var i4 = "One extra detail: in some cases you won't see the ball move at all!<br><br>";
+    i4 += "In these cases you will need to guess which goal the ball will go into without knowing the direction that it will start moving in. ";
+    i4 += "Let's look at one example. <br> <br> Press the spacebar to continue.";
+
     var i5 = "Now let's try a few sample tables before we start the experiment. <br> <br> Press the spacebar to continue.";
     var i6 = "A couple more for practice... <br> <br> Press the spacebar to continue.";
-    var i7 = "As you just saw, remember that sometimes the ball does not move. Make your best guess of where it will end. <br> <br> One more practice round. <br> <br> Press the spacebar to continue.";
-    var i8 = "You are now done with the instructions. <br> <br> Press the spacebar to start the tables where you will earn points.";
+    var i7 = "As you just saw, remember that sometimes you won't see the ball move. Make your best guess of where it will end. <br> <br> One more practice round. <br> <br> Press the spacebar to continue.";
+    var i8 = "You are now done with the instructions. <br> <br> Press the spacebar to start earning points!";
     // Intermediate functions to do recursive stuff in instructions
-    
+
     var that2 = this;
     runS1 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
@@ -234,7 +249,7 @@ Experiment.prototype.instructions = function() {
             }
         },'forward',false,true);
     };
-    
+
     runS2 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
@@ -244,7 +259,7 @@ Experiment.prototype.instructions = function() {
                 that2.badtrial = false;
                 return;
             }
-            else if (that2.trial.lastscore < 40) {
+            else if (that2.trial.lastscore < 10) {
                 that2.trial.showinstruct(irepeat,'black','white',runS2,true);
                 return;
             }
@@ -255,7 +270,7 @@ Experiment.prototype.instructions = function() {
             }
         },'forward',false);
     };
-    
+
     runS3 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
@@ -265,7 +280,7 @@ Experiment.prototype.instructions = function() {
                 that2.badtrial = false;
                 return;
             }
-            else if (that2.trial.lastscore > 0) {
+            else if (that2.trial.lastscore !== -10) {
                 that2.trial.showinstruct(irepeat2,'black','white',runS3,true);
                 return;
             }
@@ -276,7 +291,7 @@ Experiment.prototype.instructions = function() {
             }
         },'forward',false);
     };
-    
+
     runS4 = function() {
         that2.trial.loadTrial('trials/InstTr1.json');
         that2.badtrial = false;
@@ -291,7 +306,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i5,'black','white',runS5,true);
                 return;
             };
-            
+
         },'static',false);
     };
 
@@ -309,7 +324,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i6,'black','white',runS6,true);
                 return;
             };
-            
+
         },'forward',false);
     };
 
@@ -327,7 +342,7 @@ Experiment.prototype.instructions = function() {
                 that2.trial.showinstruct(i7,'black','white',runS7,true);
                 return;
             };
-            
+
         },'static',false);
     };
 
@@ -348,24 +363,25 @@ Experiment.prototype.instructions = function() {
                 that2.run(that2);
                 return;
             };
-            
+
         },'reverse',false);
     };
 
 
-    that2.trial.showinstruct(i1,'black','white', runS1, true );
+    that2.trial.showinstruct(i1,'black','white', function() {
+        that2.trial.showinstruct(i1a, 'black','white', runS1, true);
+    }, true );
 
 };
 /*
 function main() {
-    
+
     exp = new Experiment('trials/TrList.json','table','lcounter','rcounter','score');
     ws = new windowsizer(1010,870,exp);
     $(window).resize(function() {ws.checkSize(ws);});
     $(window).blur(function() {exp.badtrial = true;});
-    
+
     exp.instructions();
-    
+
 };
 */
-
