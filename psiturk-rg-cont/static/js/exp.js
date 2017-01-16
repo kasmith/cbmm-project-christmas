@@ -217,7 +217,7 @@ Experiment.prototype.instructions = function() {
     i1a += "But you can't make your prediction at any time - you will need to press the key corresponding to your prediction after the keys flash on at the bottom of the screen. <br> <br>";
     i1a += "Once you have made your prediction, you will see the full path of the ball.<br><br>Press the spacebar to see an example.";
 
-    var i2 = "But watch out, the longer you take to make your prediction by pressing the button after, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to earn some points.";
+    var i2 = "The longer you take to push the button and make your prediction, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to earn some points.";
 
     var irepeat = "You didn't press the '"+rkey+"' key fast enough. <br> <br> Press the spacebar to try again";
     var irepeat2 = "You didn't press the '"+gkey+"' key. <br> <br> Press the spacebar to try again";

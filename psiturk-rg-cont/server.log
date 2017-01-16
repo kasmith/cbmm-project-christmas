@@ -1344,3 +1344,113 @@ TemplateNotFound: trials/InstTr1.json
 2016-12-28 02:22:51 [30103] [CRITICAL] WORKER TIMEOUT (pid:30139)
 2016-12-28 02:22:51 [30103] [CRITICAL] WORKER TIMEOUT (pid:30139)
 2016-12-28 05:27:05 [30103] [CRITICAL] WORKER TIMEOUT (pid:30108)
+2017-01-13 10:56:31,586 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 395, in start_exp
+    db_session.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 541, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) database is locked u'INSERT INTO "basicRG_test" (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' ('debug2DZFPQ:debugZY1ISJ', u'debugZY1ISJ', u'debug2DZFPQ', u'debugKF6BZX', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2017-01-13 10:56:26.538977', None, None, 0.0, 1, None)
+2017-01-13 10:56:42,523 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 395, in start_exp
+    db_session.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 541, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) database is locked u'INSERT INTO "basicRG_test" (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' ('debug2DZFPQ:debugZY1ISJ', u'debugZY1ISJ', u'debug2DZFPQ', u'debugKF6BZX', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2017-01-13 10:56:37.485510', None, None, 0.0, 1, None)
