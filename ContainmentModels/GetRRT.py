@@ -13,6 +13,7 @@ class RRTstar(PlanningBase):
         randpos = self.sampleFree()
         nearest = self.tree.nearest(randpos)
         newpt = self.steer(nearest.pt,randpos)
+
         if self.collisionFree(nearest.pt,newpt) is True:
             # Find all near nodes within a predefined ball (shrinks with more vertices)
             V = self.tree.nVertices()
@@ -36,6 +37,7 @@ class RRTstar(PlanningBase):
             h = self.hitsGoal(newpt)
             if h:
                 newnode.markGoal(h)
+                self.storeStepsToGoal(h)
                 return h
             else:
                 # Rewire the tree
@@ -69,10 +71,20 @@ class RRTstar(PlanningBase):
         ctr = 0
         while running:
             ctr += 1
+            self.incrSteps()
             r = self.addTillFailure(N)
             if callback: callback()
             if r == goal: return (r, ctr)
             if r is False: return (False, ctr)
+
+    def storeStepsToGoal(self, goal):
+        if goal == GREENGOAL and self.gsteps == -1:
+            self.gsteps = self.steps
+        elif goal == REDGOAL and self.rsteps == -1:
+            self.rsteps = self.steps
+
+    def incrSteps(self):
+        self.steps += 1
 
 class RRThull(RRTstar):
     def __init__(self, tr, steersize = None, hullK = 5, hullDist = 100):
@@ -122,33 +134,36 @@ class RRThull(RRTstar):
 
 
 if __name__ == '__main__':
-    rrt = RRTstar(loadTrial(os.path.join('..','ContainmentTrials','exp_trials', 'complex_1_a.ptr')))
+    rrt = RRTstar(loadTrial(os.path.join('..','ContainmentTrials','exp_trials', 'stopper_1_a.ptr')))
     #for i in range(1000):
     #    rrt.sureAdd()
 
     #print rrt.searchTillFailure(GREENGOAL,20)
 
-    #pg.init()
-    #sc = pg.display.set_mode((1000,600))
+    pg.init()
+    sc = pg.display.set_mode((1000,600))
     #def dr():
     #    sc.blit(rrt.drawSelf(),(0,0))
     #    pg.display.flip()
     #print rrt.searchTillFailure(REDGOAL,dr)
-    for i in range(2000):
-        rrt.sureAdd()
-        #sc.blit(rrt.drawSelf(),(0,0))
-        #pg.display.flip()
+    #for i in range(2000):
+    #    if i % 100 == 0:
+    #        print str(i) + ' / 2000'
+    #    rrt.sureAdd()
+    #    sc.blit(rrt.drawSelf(),(0,0))
+    #    pg.display.flip()
 
 
     #while rrt.addTillFailure(25):
     #    sc.blit(rrt.drawSelf(),(0,0))
     #    pg.display.flip()
-    #def draw():
-    #    sc.blit(rrt.drawSelf(),(0,0))
-    #    pg.display.flip()
-    #rrt.searchTillFailure(RED,30,draw)
+    def draw():
+        sc.blit(rrt.drawSelf(),(0,0))
+        pg.display.flip()
+    rrt.searchTillFailure(REDGOAL,20,draw)
 
-    #print rrt.greendist, rrt.reddist
-    #while True:
-    #   for e in pg.event.get():
-    #        if e.type == MOUSEBUTTONDOWN: sys.exit(0)
+    print rrt.greendist, rrt.reddist
+    print rrt.gsteps, rrt.rsteps
+    while True:
+       for e in pg.event.get():
+            if e.type == MOUSEBUTTONDOWN: sys.exit(0)

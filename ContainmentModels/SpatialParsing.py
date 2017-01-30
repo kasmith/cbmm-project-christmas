@@ -1,5 +1,6 @@
 from __future__ import division
 import os, sys, copy
+from time import time
 from physicsTable import *
 from physicsTable.constants import *
 import numpy as np
@@ -122,7 +123,9 @@ class SpatialParse(object):
         return [self.gsteps, self.rsteps, self.steps]
 
 if __name__ == '__main__':
-    tr = loadTrial(os.path.join('..','CriticalTables','SemiOpen1.ptr'))
+    #tr = loadTrial(os.path.join('..','CriticalTables','SemiOpen1.ptr'))
+    tr = loadTrial(os.path.join('..','ContainmentTrials','exp_trials','porous_1_a.ptr'))
+
     SP = SpatialParse(tr)
     #SP.step()
     print np.transpose(SP.map)
@@ -131,7 +134,7 @@ if __name__ == '__main__':
     print SP.nextpts
     print SP.run()
 
-    if True:
+    if False:
         pg.init()
         sc = pg.display.set_mode((1000,600))
         tab = tr.makeTable()
