@@ -9,17 +9,20 @@ trials = []
 for tnm in os.listdir(trpath):
     if tnm[-4:] == '.ptr':
         trials.append(os.path.join(trpath, tnm))
+trials.sort(reverse=True)
 
 if __name__ == '__main__':
 
-    RRT_FAILURE_THRESHOLD = 15
+    RRT_FAILURE_THRESHOLD = 10
 
-    f = open('RRTTest.csv','w')
+    f = open('RRTTest_N' + RRT_FAILURE_THRESHOLD + '.csv','w')
     f.write('Trial,Type,GReach,GLen,RReach,RLen,TotalSteps,IsContained\n')
+    f.close()
 
     for tr in trials:
+        f = open('RRTTest.csv','a')
+        
         t = loadTrial(tr)
-
         rrt = RRTstar(t)
 
         # Uncomment lines below to visually display search
@@ -30,15 +33,15 @@ if __name__ == '__main__':
             #pg.display.flip()
             return
 
-        result = rrt.searchTillFailure(REDGOAL,RRT_FAILURE_THRESHOLD,draw)
-        greach = result[0] == GREENGOAL
-        rreach = result[0] == REDGOAL
+        rrt.searchTillFailure(RRT_FAILURE_THRESHOLD,draw)
+        greach = rrt.gsteps > 0
+        rreach = rrt.rsteps > 0
         is_contained = (greach and not rreach) or (rreach and not greach)
 
         f.write(t.name + ',RRT,' + str(greach) + ',' + str(rrt.gsteps) + ',' + 
-                str(rreach) + ',' + str(rrt.rsteps) + ',' + str(result[1]) + ',' +
+                str(rreach) + ',' + str(rrt.rsteps) + ',' + str(rrt.steps) + ',' +
                 str(is_contained) + '\n')
 
         print tr, "done"
 
-    f.close()
+        f.close()

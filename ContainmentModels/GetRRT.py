@@ -1,6 +1,7 @@
 from __future__ import division
 from PlanningBase import *
 from hulls import *
+import sys
 
 class RRTstar(PlanningBase):
     # Initialize with some constants calculated
@@ -66,7 +67,7 @@ class RRTstar(PlanningBase):
         print 'done'
         return False
 
-    def searchTillFailure(self, goal, N = 20, callback = None):
+    def searchTillFailure(self, N = 20, callback = None):
         running = True
         ctr = 0
         while running:
@@ -74,8 +75,13 @@ class RRTstar(PlanningBase):
             self.incrSteps()
             r = self.addTillFailure(N)
             if callback: callback()
-            if r == goal: return (r, ctr)
-            if r is False: return (False, ctr)
+            #if r == goal: return (r, ctr)
+            if self.gsteps > 0 and self.rsteps > 0: 
+                return (True, ctr)
+            if r is False or ctr > 3000: 
+                return (False, ctr)
+            if ctr % 500 == 0:
+                print str(ctr) + '/ 3000 steps'
 
     def storeStepsToGoal(self, goal):
         if goal == GREENGOAL and self.gsteps == -1:
@@ -134,7 +140,15 @@ class RRThull(RRTstar):
 
 
 if __name__ == '__main__':
-    rrt = RRTstar(loadTrial(os.path.join('..','ContainmentTrials','exp_trials', 'stopper_1_a.ptr')))
+    #rrt = RRTstar(loadTrial(os.path.join('..','ContainmentTrials','exp_trials', 'size_2_c.ptr')))
+    if len(sys.argv) > 1:
+        trial = sys.argv[1]
+        if sys.argv[1][:-4] != '.ptr':
+            trial = trial + '.ptr'
+    else:
+        trial = 'size_1_a.ptr'
+    rrt = RRTstar(loadTrial(os.path.join('..','ContainmentTrials','exp_trials', trial)))
+
     #for i in range(1000):
     #    rrt.sureAdd()
 
@@ -160,7 +174,7 @@ if __name__ == '__main__':
     def draw():
         sc.blit(rrt.drawSelf(),(0,0))
         pg.display.flip()
-    rrt.searchTillFailure(REDGOAL,20,draw)
+    rrt.searchTillFailure(15,draw)
 
     print rrt.greendist, rrt.reddist
     print rrt.gsteps, rrt.rsteps
