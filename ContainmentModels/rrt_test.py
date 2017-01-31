@@ -11,16 +11,20 @@ for tnm in os.listdir(trpath):
         trials.append(os.path.join(trpath, tnm))
 trials.sort(reverse=True)
 
+#trials = trials[21:]
+
 if __name__ == '__main__':
 
-    RRT_FAILURE_THRESHOLD = 10
+    RRT_FAILURE_THRESHOLD = 20
 
-    f = open('RRTTest_N' + RRT_FAILURE_THRESHOLD + '.csv','w')
+    filename = 'RRTTest_N' + str(RRT_FAILURE_THRESHOLD) + '.csv' 
+
+    f = open(filename,'a')
     f.write('Trial,Type,GReach,GLen,RReach,RLen,TotalSteps,IsContained\n')
     f.close()
 
     for tr in trials:
-        f = open('RRTTest.csv','a')
+        f = open(filename,'a')
         
         t = loadTrial(tr)
         rrt = RRTstar(t)
