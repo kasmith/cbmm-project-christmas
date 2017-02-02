@@ -17,6 +17,12 @@ def drawMotion(tr, type = "fwd"):
     tab.assignSurface(sc)
     tab.draw()
 
+    # Draw a border
+    pg.draw.line(sc, (0,0,0), (0,0), (0,tab.dim[1]),2)
+    pg.draw.line(sc, (0,0,0), (0,0), (tab.dim[0],0),2)
+    pg.draw.line(sc, (0,0,0), (tab.dim[0]-1,0), (tab.dim[0]-1, tab.dim[1]),2)
+    pg.draw.line(sc, (0, 0, 0), (0, tab.dim[1]-1), (tab.dim[0], tab.dim[1]-1), 2)
+
     if type == "none":
         return sc
 
