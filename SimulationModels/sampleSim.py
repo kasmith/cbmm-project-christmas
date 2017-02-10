@@ -1,3 +1,4 @@
+from __future__ import division
 from physicsTable import *
 from physicsTable.constants import *
 from physicsTable.models import PointSimulation
@@ -33,6 +34,8 @@ P_ERR = 25
 ps = PointSimulation(tab, KAP_V, KAP_B, KAP_M, P_ERR, nsims = 500, cpus=1)
 ps.runSimulation()
 outcomes = ps.getOutcomes()
+bounces = ps.getBounces()
 
 print "N(Green) =", outcomes[GREENGOAL]
 print "N(Red) =", outcomes[REDGOAL]
+print "Avg N bounces =", sum(bounces)/len(bounces)
