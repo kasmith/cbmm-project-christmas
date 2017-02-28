@@ -31,7 +31,9 @@ KAP_B = 25
 KAP_M = 50000
 P_ERR = 25
 
-ps = PointSimulation(tab, KAP_V, KAP_B, KAP_M, P_ERR, nsims = 500, cpus=1)
+N_SIMS = 5000
+
+ps = PointSimulation(tab, KAP_V, KAP_B, KAP_M, P_ERR, nsims = N_SIMS, cpus=1)
 ps.runSimulation()
 outcomes = ps.getOutcomes()
 bounces = ps.getBounces()
