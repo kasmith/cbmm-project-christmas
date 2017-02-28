@@ -26,7 +26,7 @@ regFwdDat = gooddat %>% filter(Class=='regular', MotionDirection=='Fwd') %>% gro
 samplesCors = vector()
 accCors = vector()
 #for (t in names(table(select(modelRegFwd, Threshold)))) 
-for (t in 10:10)
+for (t in 1:10)
 {
   cur = modelRegFwd %>% filter(Threshold == t) %>% select(Trial,ExpectedAccuracy,ExpectedNumSamples) %>% merge(regFwdDat %>% select(Trial, lRT, Acc)) %>% merge(simRegFwd %>% select(Trial, AvgBounces, AvgTime))
   ggplot(data=cur, aes(y=lRT,x=ExpectedNumSamples)) + geom_point() + geom_smooth(method='lm', col='red')
@@ -39,7 +39,6 @@ for (t in 10:10)
   #print(summary(lm(cur$lRT ~ cur$ExpectedNumSamples)))
   print(summary(lm(lRT ~ ExpectedNumSamples + AvgTime:ExpectedNumSamples + AvgBounces:ExpectedNumSamples, data=cur)))
 }
-
 
 # filter nomotion regular trials
 regNoneDat = gooddat %>% filter(Class=='regular', MotionDirection=='None') %>% group_by(Trial) %>%
@@ -62,4 +61,3 @@ for (t in 1:10)
   #print(summary(lm(cur$lRT ~ cur$ExpectedNumSamples)))
   print(summary(lm(lRT ~ ExpectedNumSamples + AvgTime:ExpectedNumSamples + AvgBounces:ExpectedNumSamples, data=cur)))
 }
-
