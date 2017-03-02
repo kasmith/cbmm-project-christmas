@@ -4,8 +4,8 @@ from physicsTable.constants import *
 from physicsTable.models import PointSimulation
 import os, json, glob
 
-KAP_V = 20
-#KAP_V = 1e-10
+#KAP_V = 20 # simulation for conditions with motion (small noise in velocity)
+KAP_V = 1e-10 # simulation for no motion condition (very high noise, ie almost uniform distribution)
 KAP_B = 25
 KAP_M = 50000
 P_ERR = 25
@@ -16,8 +16,8 @@ CPUS = 1
 WRITE_JSON = True
 
 # Regex used to list trials that are going to be simulated
-#TRIAL_REGEX = '*_*_*.json' # containment trials
-TRIAL_REGEX = 'regular_*.json' # regular trials
+TRIAL_REGEX = '*_*_*.json' # containment trials
+#TRIAL_REGEX = 'regular_*.json' # regular trials
 
 def get_sim_data(n_sims=N_SIMS, kap_v=KAP_V, kap_b=KAP_B, kap_m=KAP_M, p_err=P_ERR, cpus=CPUS):
     goal_dict = get_goal_dict()

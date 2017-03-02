@@ -20,7 +20,7 @@ def loadFromJSON(jsonfl):
 
 
 
-tr = loadFromJSON(os.path.join('..','psiturk-rg-cont','templates','trials','regular_5.json'))
+tr = loadFromJSON(os.path.join('..','psiturk-rg-cont','templates','trials','complex_5_c.json'))
 tab = tr.makeTable()
 # I believe the table settings are from the beginning, so if you want an accurate model of what people see in the 'towards'
 #  case, you should move the ball forward 500ms
