@@ -4,11 +4,13 @@ from physicsTable.constants import *
 from physicsTable.models import PointSimulation
 import os, json, glob
 
-#KAP_V = 20 # simulation for conditions with motion (small noise in velocity)
-KAP_V = 1e-10 # simulation for no motion condition (very high noise, ie almost uniform distribution)
+KAP_V_NORM = 20 # simulation for conditions with motion (small noise in velocity)
+KAP_V_NOMOT = 1e-10 # simulation for no motion condition (very high noise, ie almost uniform distribution)
 KAP_B = 25
 KAP_M = 50000
 P_ERR = 25
+
+TIMEUP = 50.
 
 N_SIMS = 5000
 CPUS = 1
@@ -16,47 +18,86 @@ CPUS = 1
 WRITE_JSON = True
 
 # Regex used to list trials that are going to be simulated
-TRIAL_REGEX = '*_*_*.json' # containment trials
-#TRIAL_REGEX = 'regular_*.json' # regular trials
+TRIAL_REGEX_CONT = '*_*_*.json' # containment trials
+TRIAL_REGEX_REG = 'regular_*.json' # regular trials
 
-def get_sim_data(n_sims=N_SIMS, kap_v=KAP_V, kap_b=KAP_B, kap_m=KAP_M, p_err=P_ERR, cpus=CPUS):
+def run_single_sim(table, n_sims, kap_v, kap_b, kap_m, p_err, timeup, cpus):
+    ps = PointSimulation(table, kap_v, kap_b, kap_m, p_err, nsims=n_sims, cpus=cpus, maxtime=timeup)
+    ps.runSimulation()
+    outcomes = ps.getOutcomes()
+    bounces = ps.getBounces()
+    times = ps.getTimes()
+    p_green = outcomes[GREENGOAL]/n_sims
+    p_red = outcomes[REDGOAL]/n_sims
+    p_timeup = 1 - p_green - p_red
+    avg_bounces = sum(bounces) / len(bounces)
+    avg_time = sum(times) / len(times)
+    return p_green, p_red, p_timeup, avg_bounces, avg_time
+
+
+def get_sim_data(n_sims=N_SIMS, kap_v_norm=KAP_V_NORM, kap_v_nomot = KAP_V_NOMOT, kap_b=KAP_B, kap_m=KAP_M, p_err=P_ERR, timeup = TIMEUP, cpus=CPUS):
     goal_dict = get_goal_dict()
 
-    with open('sim_data.csv', 'w') as csv_out:
-        csv_out.write('Trial,Goal,PGreen,PRed,AvgBounces,AvgTime\n')
+    with open('sim_data_full.csv', 'w') as csv_out:
+        csv_out.write('Trial,IsContained,Direction,Goal,PGreen,PRed,PTimeUp,AvgBounces,AvgTime\n')
         json_dict = {}
 
-        os_path = os.path.join('..', 'psiturk-rg-cont', 'templates', 'trials', TRIAL_REGEX)
-        for f in glob.iglob(os_path):
+        os_path_c = os.path.join('..', 'psiturk-rg-cont', 'templates', 'trials', TRIAL_REGEX_CONT)
+        for f in glob.iglob(os_path_c):
             trial_name = f.split(os.path.sep)[-1][:-5]
             print('Running simulations for: ' + trial_name)
 
             tr = loadFromJSON(f)
-            tab = tr.makeTable()
-            # I believe the table settings are from the beginning, so if you want an accurate model of what people see in the 'towards'
-            #  case, you should move the ball forward 500ms
-            tab.step(.5)
+            json_dict[trial_name] = {}
 
-            ps = PointSimulation(tab, kap_v, kap_b, kap_m, p_err, nsims = n_sims, cpus=cpus)
-            ps.runSimulation()
-            outcomes = ps.getOutcomes()
-            bounces = ps.getBounces()
-            times = ps.getTimes()
+            for dir in ['forward','reverse','none']:
+                tab = tr.makeTable()
+                if dir == 'reverse':
+                    tab.balls.setvel(map(lambda x: -x, tab.balls.getvel()))
+                if dir == 'none':
+                    kap_v = kap_v_nomot
+                else:
+                    tab.step(.5)
+                    kap_v = kap_v_norm
+                p_green, p_red, p_timeup, avg_bounces, avg_time = run_single_sim(tab, n_sims, kap_v, kap_b, kap_m, p_err, timeup, cpus)
+                goal = goal_dict[trial_name]
+                csv_line = ','.join(
+                    (trial_name, 'contained',dir, goal, str(p_green), str(p_red), str(p_timeup), str(avg_bounces), str(avg_time))) + '\n'
+                csv_out.write(csv_line)
 
-            goal = goal_dict[trial_name]
-            p_green = outcomes[GREENGOAL]/N_SIMS
-            p_red = outcomes[REDGOAL]/N_SIMS
-            avg_bounces = sum(bounces) / len(bounces)
-            avg_time = sum(times) / len(times)
+                if WRITE_JSON:
+                    json_dict[trial_name][dir] = {'goal': goal, 'p_green': p_green, 'p_red': p_red, 'avg_bounces': avg_bounces, 'avg_time': avg_time}
 
-            csv_line = ','.join((trial_name, goal, str(p_green), str(p_red), str(avg_bounces), str(avg_time))) + '\n'
-            csv_out.write(csv_line)
+        os_path_r = os.path.join('..', 'psiturk-rg-cont', 'templates', 'trials', TRIAL_REGEX_REG)
+        for f in glob.iglob(os_path_r):
+            trial_name = f.split(os.path.sep)[-1][:-5]
+            print('Running simulations for: ' + trial_name)
 
-            if WRITE_JSON:
-                json_dict[trial_name] = {'goal': goal, 'p_green': p_green, 'p_red': p_red, 'avg_bounces': avg_bounces, 'avg_time': avg_time}
+            tr = loadFromJSON(f)
+            json_dict[trial_name] = {}
+
+            for dir in ['forward', 'none']:
+                tab = tr.makeTable()
+                if dir == 'none':
+                    kap_v = kap_v_nomot
+                else:
+                    tab.step(.5)
+                    kap_v = kap_v_norm
+                p_green, p_red, p_timeup, avg_bounces, avg_time = run_single_sim(tab, n_sims, kap_v, kap_b, kap_m,
+                                                                                 p_err, timeup, cpus)
+                goal = goal_dict[trial_name]
+                csv_line = ','.join(
+                    (trial_name, 'regular', dir, goal, str(p_green), str(p_red), str(p_timeup), str(avg_bounces),
+                     str(avg_time))) + '\n'
+                csv_out.write(csv_line)
+
+                if WRITE_JSON:
+                    json_dict[trial_name][dir] = {'goal': goal, 'p_green': p_green, 'p_red': p_red,
+                                             'avg_bounces': avg_bounces, 'avg_time': avg_time}
+
 
     if WRITE_JSON:
-        with open('sim_data.json', 'w') as json_out:
+        with open('sim_data_full.json', 'w') as json_out:
             json.dump(json_dict, json_out)
 
 def loadFromJSON(jsonfl):
