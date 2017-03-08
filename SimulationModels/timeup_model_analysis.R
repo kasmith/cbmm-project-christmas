@@ -202,6 +202,20 @@ ggplot(best_dat,
 best_dat %>% group_by(IsContained) %>% summarize(r = cor(EmpRT, ModelRT), r_sp = cor(EmpRT, ModelRT, method='spearman'))
 
 
+# Review accuracy
+best_dat = best_dat %>% mutate(OneSampAcc = ifelse(Goal=='G', PGreen / (PGreen+PRed), PRed / (PGreen+PRed)))
+with(best_dat, cor(EmpAcc, ExpectedAccuracy))
+with(best_dat, cor(EmpAcc, OneSampAcc))
+
+summary(best_dat %>% 
+          filter(IsContained == 'regular') %>%
+          select(EmpAcc, ExpectedAccuracy, OneSampAcc))
+
+with(best_dat %>% filter(IsContained == 'regular'), cor(EmpAcc, ExpectedAccuracy))
+with(best_dat %>% filter(IsContained == 'regular'), cor(EmpAcc, OneSampAcc))
+
+qplot(ExpectedAccuracy, EmpAcc, color=Direction, shape=IsContained, data=best_dat)
+
 #
 # Fitting everything... should be more targeted
 #
