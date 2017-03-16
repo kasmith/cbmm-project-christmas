@@ -5,8 +5,9 @@ library(broom)
 
 DATA_FOLDER = "timeup_models"
 TIMEUPS = seq(10,50,by=5)
-MODFORM = EmpRT ~ ExpectedNumSamples + AvgTime:ExpectedNumSamples + AvgBounces:ExpectedNumSamples
+#MODFORM = EmpRT ~ ExpectedNumSamples + AvgTime:ExpectedNumSamples + AvgBounces:ExpectedNumSamples
 #MODFORM = EmpRT ~ ExpectedNumSamples + AvgBounces:ExpectedNumSamples
+MODFORM = EmpRT ~ HasMotion + ExpectedNumSamples + AvgTime:ExpectedNumSamples + AvgBounces:ExpectedNumSamples
 
 # load human data
 ADD_RT = FALSE
@@ -16,8 +17,9 @@ gooddat = subset(rawdat, !(WID %in% incompletes) & (WasBad=="False") & (RawRespo
 if (ADD_RT) gooddat$RT = gooddat$RT + .5
 gooddat$LogRT = log(gooddat$RT)
 gooddat$WasCorrect = with(gooddat, Response == Goal)
+gooddat$HasMotion = factor(with(gooddat, ifelse(MotionDirection=='None','No','Yes')))
 
-trialdat = gooddat %>% mutate(Direction=MotionDirection) %>% group_by(Trial, Direction) %>%
+trialdat = gooddat %>% mutate(Direction=MotionDirection) %>% group_by(Trial, Direction, HasMotion) %>%
   summarize(N = length(WID), EmpAcc = mean(WasCorrect), EmpLogRT = mean(LogRT), EmpLogRTSD = sd(LogRT)) %>% 
   mutate(EmpRT = exp(EmpLogRT))
 levels(trialdat$Direction) = c('forward', 'none', 'reverse')
@@ -120,6 +122,7 @@ ggplot(mot_dat, aes(x=ModelRT, y=EmpRT, ymin = EmpRT_Lwr, ymax = EmpRT_Upr, colo
   theme_bw() + ylim(0,1)
 with(mot_dat, cor(EmpRT, ModelRT))
 with(mot_dat, cor(EmpRT, ModelRT, method='spearman'))
+with(mot_dat %>% filter(ModelRT < 1), cor(EmpRT, ModelRT))
 
 # Repeat of Fig 5 but with average sim time
 ggplot(mot_dat, aes(x=AvgTime, y=EmpRT, ymin = EmpRT_Lwr, ymax = EmpRT_Upr, color = TrType)) +
@@ -135,10 +138,9 @@ mot_dat %>% group_by(TrType) %>% summarize(mod_r = cor(EmpRT, ModelRT, method=co
                                            simt_r = cor(EmpRT, AvgTime, method=cortype), 
                                            act_r = cor(EmpRT, ActTime, method=cortype), 
                                            timecor = cor(AvgTime, ActTime))
-
 # Figure out slope / bias over conditions
 bias_means = best_dat %>% group_by(Direction, IsContained) %>%
-  summarize(MeanRT = mean(EmpRT), MeanModRT = mean(ModelRT))
+  summarize(MeanRT = mean(EmpRT), MeanModRT = mean(ModelRT), AvgMSE = mean((ModelRT-EmpRT)^2), Cor = cor(ModelRT, EmpRT))
 
 bias_table = best_dat %>% group_by(Direction, IsContained) %>%
   do(tmplm = lm(EmpRT ~ ModelRT, data= .)) %>%
