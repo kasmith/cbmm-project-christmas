@@ -1,0 +1,35 @@
+[HIT Configuration]
+title = Predict where the ball goes
+description = Make predictions about where a ball bouncing around a table will end up
+amt_keywords = Psychology, Prediction, Science, Game
+lifetime = 24
+us_only = true
+approve_requirement = 95
+contact_email_on_error = k2smith@mit.edu
+ad_group = Physics Prediction
+psiturk_keywords = intuitive physics, psychology, experiment
+organization_name = MIT
+browser_exclude_rule = MSIE, mobile, tablet
+
+[Database Parameters]
+database_url = mysql://k2smith:ptdbpw227@psiturkdb.cfk6ynxmnsif.us-west-2.rds.amazonaws.com:3306/psiturkdb
+table_name = contain_debug
+
+[Server Parameters]
+host = ec2-52-24-254-212.us-west-2.compute.amazonaws.com
+port = 22362
+cutoff_time = 30
+logfile = server.log
+loglevel = 2
+debug = true
+login_username = k2smith
+login_pw = ptdbpw227
+threads = auto
+
+[Task Parameters]
+experiment_code_version = 2.0
+num_conds = 9
+num_counters = 1
+
+[Shell Parameters]
+launch_in_sandbox_mode = true
