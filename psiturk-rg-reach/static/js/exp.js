@@ -166,8 +166,8 @@ Experiment.prototype.recordTrial = function(me) {
 
     // Insert psiturk recording code here
     //console.log(resp);
-    // TODO Why 199? What about NORESPONSE?
-    var respdict = {199: "NA"};
+    // (199 might also be NORESPONSE (?))
+    var respdict = {199: "NA", NORESPONSE: "NA"};
     respdict[true] = true;
     respdict[false] = false;
     var modict = {1: "Fwd", 0: "None"};
@@ -230,7 +230,7 @@ Experiment.prototype.instructions = function() {
     i1 += "You should press the 'z' button for " + lcol + " - that is, if you believe the ball CAN reach the red rectangle. You should press the 'm' button for " + rcol + " - that is, if you believe the ball CANNOT reach the red rectangle.<br><br>";
     i1 += "Press the spacebar to continue.";
 
-    i1a += "However you cannot give your response at any time - you will need to press the key corresponding to your response only after the options flash on at the bottom of the screen. <br> <br>";
+    var i1a = "However you cannot give your response at any time - you will need to press the key corresponding to your response only after the options flash on at the bottom of the screen. <br> <br>";
     i1a += "Once you have made your prediction, you will see the correct answer.<br><br>Press the spacebar to see an example.";
 
     var i2 = "The longer you take to push the button and make your prediction, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to earn some points.";
