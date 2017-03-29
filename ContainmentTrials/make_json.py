@@ -1,8 +1,8 @@
 from physicsTable import *
 import os
 
-PTR_DIR = "exp_trials"
-JSON_DIR = "JSON"
+PTR_DIR = "reach_trials"
+JSON_DIR = "reach_JSON"
 
 for fnm in os.listdir(PTR_DIR):
     if fnm[-4:] == '.ptr':

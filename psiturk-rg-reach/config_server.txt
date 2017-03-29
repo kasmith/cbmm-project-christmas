@@ -1,0 +1,35 @@
+[HIT Configuration]
+title = Sculpture Balance
+description = Judge whether sculptures will tip or remain stable
+amt_keywords = Perception, Psychology, Balance
+lifetime = 24
+us_only = true
+approve_requirement = 95
+contact_email_on_error = k2smith@mit.edu
+ad_group = Sculpture Balance
+psiturk_keywords = balance beams, intuitive physics, psychology
+organization_name = MIT
+browser_exclude_rule = MSIE, mobile, tablet
+
+[Database Parameters]
+database_url = mysql://psiturkdb.cfk6ynxmnsif.us-west-2.rds.amazonaws.com:3306
+table_name = balance_basic
+
+[Server Parameters]
+host = ec2-52-36-128-35.us-west-2.compute.amazonaws.com
+port = 22362
+cutoff_time = 30
+logfile = server.log
+loglevel = 2
+debug = true
+login_username = k2smith
+login_pw = ptdbpw227
+threads = auto
+
+[Task Parameters]
+experiment_code_version = 1.0
+num_conds = 2
+num_counters = 1
+
+[Shell Parameters]
+launch_in_sandbox_mode = true
