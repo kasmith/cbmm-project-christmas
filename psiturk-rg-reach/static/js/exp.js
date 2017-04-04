@@ -93,8 +93,8 @@ Experiment = function(triallist, table, textbox, leftctr, rightctr, score, trcou
     this.pt = ptobj;
 
     // Load in the trial object
-    this.rol = Math.random() < 0.5;
-    this.trial = new Trial(table,textbox,leftctr,rightctr,score,trcounter,this.rol);
+    this.yol = Math.random() < 0.5;
+    this.trial = new Trial(table,textbox,leftctr,rightctr,score,trcounter,this.yol);
     this.trial.showinstruct("Please wait for all of the data to load.", 'black','white', function() {return;}, true);
 
     // Load in the list of trials to use & shuffle them
@@ -120,7 +120,7 @@ Experiment = function(triallist, table, textbox, leftctr, rightctr, score, trcou
 
     this.trial.trcounter.setnumtrials(this.trlist.length);
 
-    this.pt.recordUnstructuredData('RedOnLeft',this.rol);    
+    this.pt.recordUnstructuredData('YesOnLeft',this.yol);    
 };
 
 Experiment.prototype.startTrials = function(me) {
@@ -155,8 +155,8 @@ Experiment.prototype.nextTrial = function(me) {
 Experiment.prototype.recordTrial = function(me) {
     var trname = me.trial.tb.name;
     var motioncond = me.trial.motioncond
-    var goalin = me.trial.isgoalin();
-    var resp = me.trial.response;
+    var goalreachable = me.trial.isgoalreachable();
+    var resp = me.trial.reachresponse;
     var resptime = me.trial.resptime;
     var expcondition = this.pt.taskdata.get('condition');
 
@@ -165,11 +165,10 @@ Experiment.prototype.recordTrial = function(me) {
     var sc = me.trial.lastscore;
 
     // Insert psiturk recording code here
-    //console.log(resp);
     // (199 might also be NORESPONSE (?))
     var respdict = {199: "NA", NORESPONSE: "NA"};
-    respdict[true] = true;
-    respdict[false] = false;
+    respdict[true] = true; // reachable
+    respdict[false] = false; // not reachable
     var modict = {1: "Fwd", 0: "None"};
     modict[-1] = "Rev";
     var recdat = {Condition: expcondition,
@@ -178,7 +177,7 @@ Experiment.prototype.recordTrial = function(me) {
                   RT: resptime,
                   RawResponse: respdict[resp],
                   MotionDirection: modict[motioncond],
-                  GoalReachable: goalin,
+                  GoalReachable: goalreachable,
                   Score: sc,
                   WasBad: me.badtrial
               };
@@ -209,36 +208,36 @@ Experiment.prototype.instructions = function() {
     var itr1 = 'trials/InstTr1.json';
     var itr2 = 'trials/InstTr2.json';
 
-    var lcol, rcol, rkey, gkey;
+    var loption, roption, yeskey, nokey;
 
-    if (this.rol) {
-        lcol = 'YES';
-        rcol = 'NO';
-        rkey = 'z';
-        gkey = 'm';
+    if (this.yol) {
+        loption = 'YES';
+        roption = 'NO';
+        yeskey = 'z';
+        nokey = 'm';
     } else {
-        rcol = 'NO';
-        lcol = 'YES';
-        gkey = 'z';
-        rkey = 'm';
+        roption = 'NO';
+        loption = 'YES';
+        nokey = 'z';
+        yeskey = 'm';
     }
 
     var isizing = 'Please keep the window open and large enough for the experiment';
 
-    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will also see a red rectangle. <br><br>";
-    i1 += "After the ball stops you will need to answer: <br> Can the ball reach the red rectangle? <br><br>";
-    i1 += "You should press the 'z' button for " + lcol + " - that is, if you believe the ball CAN reach the red rectangle. You should press the 'm' button for " + rcol + " - that is, if you believe the ball CANNOT reach the red rectangle.<br><br>";
+    var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will also see a red rectangle. This is the goal.<br><br>";
+    i1 += "After the ball stops you will need to answer: <br> Can the ball reach the red goal? <br><br>";
+    i1 += "You should press the 'z' button for " + loption + " - that is, if you believe the ball CAN reach the red goal. You should press the 'm' button for " + roption + " - that is, if you believe the ball CANNOT reach the red goal.<br><br>";
     i1 += "Press the spacebar to continue.";
 
     var i1a = "However you cannot give your response at any time - you will need to press the key corresponding to your response only after the options flash on at the bottom of the screen. <br> <br>";
     i1a += "Once you have made your prediction, you will see the correct answer.<br><br>Press the spacebar to see an example.";
 
-    var i2 = "The longer you take to push the button and make your prediction, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + rkey + "' key after it flashes at the bottom of the screen to earn some points.";
+    var i2 = "The longer you take to push the button and make your prediction, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + yeskey + "' key after it flashes at the bottom of the screen to earn some points.";
 
-    var irepeat = "You didn't press the '"+rkey+"' key fast enough. <br> <br> Press the spacebar to try again";
-    var irepeat2 = "You didn't press the '"+gkey+"' key. <br> <br> Press the spacebar to try again";
+    var irepeat = "You didn't press the '"+yeskey+"' key fast enough. <br> <br> Press the spacebar to try again";
+    var irepeat2 = "You didn't press the '"+nokey+"' key. <br> <br> Press the spacebar to try again";
 
-    var i3 = "Watch out though - if you press the key for the wrong answer, you will lose points. <br> <br> Press the spacebar to continue, then press the '"+gkey+"' key to see how you can lose points.";
+    var i3 = "Watch out though - if you press the key for the wrong answer, you will lose points. <br> <br> Press the spacebar to continue, then press the '"+nokey+"' key to see how you can lose points.";
 
     var i4 = "One extra detail: in some cases you won't see the ball move at all!<br><br>";
     i4 += "In these cases you will still have to try to answer the question without knowing the direction that the ball will start moving in. <br><br>";

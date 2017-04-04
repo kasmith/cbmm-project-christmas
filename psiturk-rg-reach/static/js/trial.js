@@ -37,11 +37,8 @@ Button = function(color, elemname, txt, font) {
     //this.ctx.strokeRect(boxleft,0,this.boxwid,hgt);
     
 
-    console.log(font);
-    console.log(txt)
     if (font === undefined)
         font = '30px Times New Roman bold';
-    console.log(font)
     this.ctx.font = font;
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
@@ -174,10 +171,10 @@ KeyHandler.prototype.setrelease = function(fn) {this.onkr = fn;};
 TIME_BEGIN = 0.3;
 TIME_END = 2.0;
 
-Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, redonleft) {
-    this.rol = redonleft;
+Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, yesonleft) {
+    this.yol = yesonleft;
     this.tbele = tbele = document.getElementById(table);
-    if (redonleft) {lbtxt = 'Yes: Z'; rbtxt = 'No: M';}
+    if (yesonleft) {lbtxt = 'Yes: Z'; rbtxt = 'No: M';}
     else {lbtxt = 'No: Z'; rbtxt = 'Yes: M';}
     this.txtele = document.getElementById(textbox);
     this.txtbox = new Button(WHITE,textbox,'Can the ball reach the goal?','26px Times New Roman bold');
@@ -185,9 +182,9 @@ Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, redonleft)
     this.rbtn = new Button(BLACK,rightbtn,rbtxt);
     this.score = new ScoreDisp(score);
     this.trcounter = new TrialCounter(trcounter);
-    this.response = NORESPONSE; 
+    this.reachresponse = NORESPONSE; 
     this.resptime = -1;
-    this.goalin = false;
+    this.goalreachable = false;
     this.motioncond = 1;
     this.done = false;
     this.paused = false;
@@ -211,13 +208,13 @@ Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, redonleft)
 Trial.prototype.loadTrial = function(trfile) {
     this.tb = loadTrial(trfile,this.tbele);
     this.done = false;
-    this.response = NORESPONSE;
+    this.reachresponse = NORESPONSE;
     this.resptime = -1;
 };
 Trial.prototype.loadFromTList = function(trname, trlist) {
     this.tb = trlist.loadTrial(trname, this.tbele);
     this.done = false;
-    this.response = NORESPONSE;
+    this.reachresponse = NORESPONSE;
     this.resptime = -1;
 };
 Trial.prototype.draw = function(flash) {
@@ -340,6 +337,7 @@ Trial.prototype.writenewscore = function(newscore,showscore) {
         ctx.fillText(tx2,centx,centy);
     }
 };
+
 Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callback,showscore) {
     var that = this;
     // store trial ball vel
@@ -354,7 +352,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
             that.tb.ball.setvel(vel['x'], vel['y']);
 	}
         // if goal is not reachable, make ending display shorter
-        if (!that.goalin) {
+        if (!that.goalreachable) {
             maxtime = maxtime / 2.0;
         }
 
@@ -365,17 +363,14 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
 
             that.draw(true);
 
-            if (pev !== 0) {
-                //assert(pev !== TIMEUP, "Oddly, your trial ran too long");
-                if (pev === TIMEUP)
-                    console.log('Debug: Trial timeup')
+            if (pev !== 0) { // Time up
                 clearInterval(interid);
 
                 // Update score
-                if (that.response === NORESPONSE) {
+                if (that.reachresponse === NORESPONSE) {
                     score = 0;
                 }
-                else if (that.goalin !== that.response) {
+                else if (that.goalreachable !== that.reachresponse) {
                     score = -10;
                 }
                 else {
@@ -412,16 +407,16 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
                 that.resptime = (new Date() - start) / 1000;
-                if (that.rol) that.response = false;
-                else that.response = true;
+                if (that.yol) that.reachresponse = false;
+                else that.reachresponse = true;
                 finishtrial();
             }
             else if (k===90) {
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
                 that.resptime = (new Date() - start) / 1000;
-                if (that.rol) that.response = true;
-                else that.response = false;
+                if (that.yol) that.reachresponse = true;
+                else that.reachresponse = false;
                 finishtrial();
             }
         });
@@ -446,10 +441,10 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
     }, dt*1000);
 };
 
-// Keep only the correct goal, either in (goal in is true),
-// or out (goalin is false)
-Trial.prototype.goalinout = function(goalin) {
-    if (goalin) 
+// Keep only the correct goal, either in (goalreachable is true),
+// or out (goalreachable is false)
+Trial.prototype.choosegoal = function(goalreachable) {
+    if (goalreachable) 
         if (this.tb.goals[0].onret === GREENGOAL) 
             this.tb.goals.splice(1, 1);
         else
@@ -463,16 +458,15 @@ Trial.prototype.goalinout = function(goalin) {
     this.tb.goals[0].color = RED;
 };
 
-Trial.prototype.isgoalin= function() {
-    return this.goalin;
+Trial.prototype.isgoalreachable= function() {
+    return this.goalreachable;
 };
 
 Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,motioncond,goalcond,showscore) {
     if (typeof(goalcond) === 'undefined') 
         goalcond = (Math.random() < 0.5);
-    this.goalin = (goalcond != 'out');
-    console.log(this.goalin)
-    this.goalinout(this.goalin);
+    this.goalreachable = (goalcond != 'out');
+    this.choosegoal(this.goalreachable);
 
     // assign motion condition value
     if (motioncond === 'static')
