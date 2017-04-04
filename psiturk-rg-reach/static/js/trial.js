@@ -353,6 +353,11 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
         if (that.motioncond == 0) {
             that.tb.ball.setvel(vel['x'], vel['y']);
 	}
+        // if goal is not reachable, make ending display shorter
+        if (!that.goalin) {
+            maxtime = maxtime / 2.0;
+        }
+
         // display trial ending for feedback at triple speed
         var pev = 0;
         interid = setInterval(function () {
