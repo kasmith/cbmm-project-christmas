@@ -207,6 +207,7 @@ Experiment.prototype.instructions = function() {
 
     var itr1 = 'trials/InstTr1.json';
     var itr2 = 'trials/InstTr2.json';
+    var itr3 = 'trials/InstTr3.json';
 
     var loption, roption, yeskey, nokey;
 
@@ -243,15 +244,15 @@ Experiment.prototype.instructions = function() {
     i4 += "In these cases you will still have to try to answer the question without knowing the direction that the ball will start moving in. <br><br>";
     i4 += "Let's look at one example. <br> <br> Press the spacebar to continue.";
 
-    var i5 = "Now let's try a few more examples before we start the experiment. <br> <br> Press the spacebar to continue.";
-    var i6 = "A couple more for practice... <br> <br> Press the spacebar to continue.";
-    var i7 = "As you just saw, remember that sometimes you won't see the ball move. Still, make your best guess to try to answer the question. <br> <br> Just one more practice round. <br> <br> Press the spacebar to continue.";
+    var i5 = "As you saw, in this example the ball was able to reach the goal. This will not always be the case. In the next example you will see the ball won't be able to reach the goal. <br> <br> Press the spacebar to continue.";
+    var i6 = "Now let's try one more example before we start the experiment. <br> <br> As you just saw, also remember that sometimes you won't see the ball move. Still, make your best guess to try to answer the question. <br> <br> Press the spacebar to continue.";
+    var i7 = "As you just saw, also remember that sometimes you won't see the ball move. Still, make your best guess to try to answer the question. <br> <br> Just one more practice round. <br> <br> Press the spacebar to continue.";
     var i8 = "You are now done with the instructions. <br> <br> Press the spacebar to start earning points!";
     // Intermediate functions to do recursive stuff in instructions
 
     var that2 = this;
     runS1 = function() {
-        that2.trial.loadTrial('trials/InstTr1.json');
+        that2.trial.loadTrial(itr1);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -268,7 +269,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS2 = function() {
-        that2.trial.loadTrial('trials/InstTr1.json');
+        that2.trial.loadTrial(itr1);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -289,7 +290,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS3 = function() {
-        that2.trial.loadTrial('trials/InstTr1.json');
+        that2.trial.loadTrial(itr1);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -310,7 +311,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS4 = function() {
-        that2.trial.loadTrial('trials/InstTr1.json');
+        that2.trial.loadTrial(itr1);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -328,7 +329,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS5 = function() {
-        that2.trial.loadTrial('trials/InstTr2.json');
+        that2.trial.loadTrial(itr2);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -342,11 +343,11 @@ Experiment.prototype.instructions = function() {
                 return;
             };
 
-        },'forward','in');
+        },'forward','out');
     };
-
+/*
     runS6 = function() {
-        that2.trial.loadTrial('trials/InstTr3.json');
+        that2.trial.loadTrial(itr3);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -362,13 +363,13 @@ Experiment.prototype.instructions = function() {
 
         },'forward','out');
     };
-
-    runS7 = function() {
-        that2.trial.loadTrial('trials/InstTr2.json');
+*/
+    runS6 = function() {
+        that2.trial.loadTrial(itr3);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
-                that2.trial.showinstruct(isizing,'black','white',runS7,true);
+                that2.trial.showinstruct(isizing,'black','white',runS6,true);
                 that2.badtrial = false;
                 return;
             }
@@ -381,15 +382,14 @@ Experiment.prototype.instructions = function() {
                 return;
             };
 
-        },'forward','out');
+        },'static','out');
     };
-
 
     that2.trial.showinstruct(i1,'black','white', function() {
         that2.trial.showinstruct(i1a, 'black','white', runS1, true);
     }, true );
-
 };
+
 /*
 function main() {
 
