@@ -209,7 +209,6 @@ Experiment.prototype.instructions = function() {
     var itr2 = 'trials/InstTr2.json';
     var itr3 = 'trials/InstTr3.json';
     var itr4 = 'trials/InstTr4.json';
-    var itr5 = 'trials/InstTr5.json';
 
     var loption, roption, yeskey, nokey;
 
@@ -248,7 +247,7 @@ Experiment.prototype.instructions = function() {
     i4 += "Let's look at one example. <br> <br> Press the spacebar to continue.";
 
     var i5 = "As you saw, in this example the ball was able to reach the goal. This will not always be the case. In the next example you will see the ball won't be able to reach the goal. <br> <br> Press the spacebar to continue.";
-    var i6 = "Now let's try two more examples before we start the experiment. <br> <br> As you just saw, also remember that sometimes you won't see the ball move. Still, make your best guess to try to answer the question. <br> <br> Press the spacebar to continue.";
+    var i6 = "Now let's try two more examples before we start the experiment. <br> <br> Press the spacebar to continue.";
     var i7 = "As you just saw, also remember that sometimes you won't see the ball move. Still, make your best guess to try to answer the question. <br> <br> Just one more practice round. <br> <br> Press the spacebar to continue.";
     var i8 = "You are now done with the instructions. <br> <br> Press the spacebar to start earning points!";
     // Intermediate functions to do recursive stuff in instructions
@@ -358,7 +357,7 @@ Experiment.prototype.instructions = function() {
     };
 
     runS6 = function() {
-        that2.trial.loadTrial(itr4);
+        that2.trial.loadTrial(itr3);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
@@ -380,7 +379,7 @@ Experiment.prototype.instructions = function() {
     }, true );
 
     runS7 = function() {
-        that2.trial.loadTrial(itr5);
+        that2.trial.loadTrial(itr4);
         that2.badtrial = false;
         that2.trial.runtrial(DT,DISPLAY_TIME,RESPONSE_TIME,MAX_TIME,function () {
             if (that2.badtrial) {
