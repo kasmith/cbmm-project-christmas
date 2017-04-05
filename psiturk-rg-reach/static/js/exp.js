@@ -382,7 +382,7 @@ Experiment.prototype.instructions = function() {
                 return;
             };
 
-        },'static','out');
+        },'static','in');
     };
 
     that2.trial.showinstruct(i1,'black','white', function() {
