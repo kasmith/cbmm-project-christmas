@@ -14,7 +14,7 @@ p6
 I100
 sS'name'
 p7
-S'porous_2_a'
+S'porous_reach_2_a'
 p8
 sS'bkc'
 p9
@@ -40,10 +40,10 @@ p15
 sS'normwalls'
 p17
 (lp18
-((I798
+((I757
 I84
 tp19
-(I826
+(I784
 I436
 tp20
 (I0
@@ -55,7 +55,7 @@ tp22
 a((I199
 I410
 tp23
-(I821
+(I759
 I436
 tp24
 g21
@@ -73,8 +73,8 @@ tp28
 a((I200
 I84
 tp29
-(I824
-I107
+(I758
+I110
 tp30
 g21
 F1
@@ -122,10 +122,10 @@ I0
 I0
 tp45
 tp46
-a((I757
+a((I719
 I114
 tp47
-(I793
+(I755
 I407
 tp48
 I202

@@ -228,11 +228,14 @@ Experiment.prototype.instructions = function() {
 
     var i1 = "In this experiment, you will see a ball bouncing around the screen for a short amount of time and then stop. You will also see a red rectangle. This is the goal.<br><br>";
     i1 += "After the ball stops you will need to answer: <br> Can the ball reach the red goal? <br><br>";
-    i1 += "You should press the 'z' button for " + loption + " - that is, if you believe the ball CAN reach the red goal. You should press the 'm' button for " + roption + " - that is, if you believe the ball CANNOT reach the red goal.<br><br>";
+    i1 += "A ball can reach the goal if at any point in the future it might run into it, and cannot reach the goal if it will not, no matter how long the ball bounces around for.<br><br>";
     i1 += "Press the spacebar to continue.";
 
-    var i1a = "However you cannot give your response at any time - you will need to press the key corresponding to your response only after the options flash on at the bottom of the screen. <br> <br>";
-    i1a += "Once you have made your prediction, you will see the correct answer.<br><br>Press the spacebar to see an example.";
+    i1a = "You should press the 'z' button for " + loption + " - that is, if you believe the ball CAN reach the red goal. You should press the 'm' button for " + roption + " - that is, if you believe the ball CANNOT reach the red goal.<br><br>";
+    i1a += "Press the spacebar to continue.";
+
+    var i1b = "However you cannot give your response at any time - you will need to press the key corresponding to your response only after the options flash on at the bottom of the screen. <br> <br>";
+    i1b += "Once you have made your prediction, you will see a path that the ball can take to the goal if it can reach, or the ball bouncing around then stopping if it cannot.<br><br>Press the spacebar to see an example.";
 
     var i2 = "The longer you take to push the button and make your prediction, the fewer points you get. <br> <br> Press the spacebar to continue, then press the '" + yeskey + "' key after it flashes at the bottom of the screen to earn some points.";
 
@@ -374,10 +377,6 @@ Experiment.prototype.instructions = function() {
         },'static','in');
     };
 
-    that2.trial.showinstruct(i1,'black','white', function() {
-        that2.trial.showinstruct(i1a, 'black','white', runS1, true);
-    }, true );
-
     runS7 = function() {
         that2.trial.loadTrial(itr4);
         that2.badtrial = false;
@@ -400,6 +399,14 @@ Experiment.prototype.instructions = function() {
         that2.trial.trcounter.display = true;
         that2.run(that2);
     };
+
+    that2.trial.showinstruct(i1,'black','white', function() {
+        that2.trial.showinstruct(i1a, 'black','white', function () {
+            that2.trial.showinstruct(i1b, 'black','white', runS1, true);
+        }, true);
+    }, true );
+
+
 };
 
 /*

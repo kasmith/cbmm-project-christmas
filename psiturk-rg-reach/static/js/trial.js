@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,7 @@
 // Variables for timing
 var TIMEPERSTEP = .025;
 var TIMEPERPOLL = .1;
-
+var MAXDISPTIME = 5;
 
 var assert = function(value, message)
 {
@@ -23,19 +23,19 @@ Button = function(color, elemname, txt, font) {
     this.ele = document.getElementById(elemname);
     this.ctx = this.ele.getContext('2d');
     this.txt = txt;
-    
+
     // Setup the drawing
     var wid = this.ele.width;
     var hgt = this.ele.height;
     $('#'+elemname).css({'border-color':this.color});
-    
+
     var boxleft = 0;
-        
+
     this.ctx.fillStyle = color;
     this.ctx.strokeStyle = 'black';
     this.ctx.fillRect(boxleft,0,wid,hgt);
     //this.ctx.strokeRect(boxleft,0,this.boxwid,hgt);
-    
+
 
     if (font === undefined)
         font = '30px Times New Roman bold';
@@ -44,7 +44,7 @@ Button = function(color, elemname, txt, font) {
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'middle';
     this.ctx.fillText(this.txt, boxleft + wid/2, hgt/2);
-    
+
     this.draw();
 };
 
@@ -71,18 +71,18 @@ ScoreDisp.prototype.add = function(sc) {
 ScoreDisp.prototype.draw = function() {
     var ewid = this.ele.width;
     var ehgt = this.ele.height;
-    
+
     this.ctx.clearRect(0,0,this.ele.width,this.ele.height);
-    
+
     this.ctx.font = '20px Times New Roman bold';
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'top';
     this.ctx.fillText('Score:',ewid/2,0);
-    
+
     this.ctx.textBaseline = 'bottom';
     this.ctx.fillText(this.score, ewid/2,ehgt);
-    
+
 };
 ScoreDisp.prototype.reset = function() {
     this.score = 0;
@@ -108,26 +108,26 @@ TrialCounter.prototype.draw = function() {
 
     var ewid = this.ele.width;
     var ehgt = this.ele.height;
-    
+
     this.ctx.clearRect(0,0,this.ele.width,this.ele.height);
-    
+
     this.ctx.font = '20px Times New Roman bold';
     this.ctx.fillStyle = 'black';
     this.ctx.textAlign = 'center';
     this.ctx.textBaseline = 'top';
     this.ctx.fillText('Trial:',ewid-40,0);
-    
+
     this.ctx.textBaseline = 'bottom';
     this.ctx.fillText(this.count+'/'+this.numtrials,ewid-40,ehgt);
     this.ctx.fillStyle = 'white';
-    
+
 };
 TrialCounter.prototype.reset = function() {
     this.count = 1;
 };
 
 /**
- * 
+ *
  * @param {array} keys - array of keys to keep track of (using jquery numbering)
  * @param {function} onkeypress - a function that takes in the key pressed and gets called when
  *                           one of the tracked keys is pressed
@@ -140,10 +140,10 @@ KeyHandler = function(keys, onkeypress, onkeyrelease) {
     for (i=0;i<keys.length;i++) {
         this.state[keys[i]] = false;
     }
-    
+
     this.onkp = onkeypress;
     this.onkr = onkeyrelease;
-    
+
     // Set handlers
     var that = this;
     var k;
@@ -182,7 +182,7 @@ Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, yesonleft)
     this.rbtn = new Button(BLACK,rightbtn,rbtxt);
     this.score = new ScoreDisp(score);
     this.trcounter = new TrialCounter(trcounter);
-    this.reachresponse = NORESPONSE; 
+    this.reachresponse = NORESPONSE;
     this.resptime = -1;
     this.goalreachable = false;
     this.motioncond = 1;
@@ -190,9 +190,9 @@ Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, yesonleft)
     this.paused = false;
 
     assert(tbele.getContext,'No support for canvases!');
-    
+
     this.tb = new Table('tmp',tbele.width,tbele.height,tbele);
-    
+
     this.keymap = {
         32: 'space',
         77: 'm',
@@ -203,7 +203,7 @@ Trial = function(table, textbox, leftbtn, rightbtn, score, trcounter, yesonleft)
         Object.keys(this.keymap),
         function(k) {},
         function(k) {});
-    
+
 };
 Trial.prototype.loadTrial = function(trfile) {
     this.tb = loadTrial(trfile,this.tbele);
@@ -237,7 +237,7 @@ Trial.prototype.step = function(dt) {
 };
 Trial.prototype.gettrialsteps = function(dt) {
     var tableclone = this.tb.clone();
-    
+
     var nsteps = 0;
     var e = 0;
     while (e === 0) { e = tableclone.step(dt); nsteps++; }
@@ -245,9 +245,9 @@ Trial.prototype.gettrialsteps = function(dt) {
 };
 Trial.prototype.gettrialgoal = function(dt) {
     var tableclone = this.tb.clone();
-    
+
     var e = 0;
-    while (e === 0) 
+    while (e === 0)
         e = tableclone.step(dt);
     return e;
 };
@@ -267,17 +267,17 @@ Trial.prototype.displaytext = function(text, textcol, bkcol,hideall) {
         $("#"+this.rbtn.ele.id).hide(0);
         $("#"+this.trcounter.ele.id).hide(0);
     }
-    
-    
+
+
     tf = $('#textfield');
     tf.html(htmtext);
     tf.css({'background-color':bkcol,'color':textcol});
-    tf.show(0); 
-    
+    tf.show(0);
+
 };
 Trial.prototype.hidetext = function() {
     $("#"+this.tbele.id).show(0);
-    
+
     $("#"+this.txtbox.ele.id).show(0);
     $("#"+this.lbtn.ele.id).show(0);
     $("#"+this.score.ele.id).show(0);
@@ -311,21 +311,21 @@ Trial.prototype.restoreText = function(textcol,bkcol) {
 Trial.prototype.writenewscore = function(newscore,showscore) {
     var tx1 = "You earned " + newscore + " points on this trial";
     var tx2 = "Press spacebar to continue";
-    
+
     var ctx = this.tbele.getContext('2d');
     ctx.font = "30px Times New Roman";
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'black';
     ctx.textAlign = 'center';
-    
+
     var newwid = 10 + Math.max(ctx.measureText(tx1).width,ctx.measureText(tx2).width);
-    
+
     var centx = this.tbele.width/2;
     var centy = this.tbele.height/2;
-    
+
     ctx.clearRect(centx - newwid/2, centy - 37.5, newwid, 75);
     ctx.strokeRect(centx - newwid/2, centy - 37.5, newwid, 75);
-    
+
     if (typeof(showscore) === 'undefined' || !showscore) {
         ctx.textBaseline = 'top';
         ctx.fillText(tx1,centx,centy - 32.5);
@@ -353,7 +353,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
 	}
         // if goal is not reachable, make ending display shorter
         if (!that.goalreachable) {
-            maxtime = maxtime / 2.0;
+            maxtime = MAXDISPTIME;
         }
 
         // display trial ending for feedback at triple speed
@@ -374,7 +374,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                     score = -10;
                 }
                 else {
-                    score = 100 * (1 - (that.resptime-TIME_BEGIN)/(TIME_END-TIME_BEGIN)); 
+                    score = 100 * (1 - (that.resptime-TIME_BEGIN)/(TIME_END-TIME_BEGIN));
                     score = Math.round(Math.max(Math.min(score,100),0));
                 }
                 that.score.add(score);
@@ -382,9 +382,9 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                 that.writenewscore(score,showscore);
                 that.done = true;
                 that.lastscore = score;
-                
+
                 that.keyhandler.setpress(function(k) {
-                    if (k===32) { 
+                    if (k===32) {
                         that.hidetext();
                         that.keyhandler.setpress(function(k) {});
                         callback();
@@ -392,7 +392,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
                 });
 
             }
-        }, dt*1000 / 3); 
+        }, dt*1000 / 3);
     };
 
     // function to be called after trial display, to wait for response
@@ -403,7 +403,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
         var timeoutid;
         var start = new Date();
         that.keyhandler.setpress(function(k) {
-            if (k===77) { 
+            if (k===77) {
                 that.keyhandler.setpress(function(k) {});
                 clearTimeout(timeoutid);
                 that.resptime = (new Date() - start) / 1000;
@@ -426,7 +426,7 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
 
     // set ball vel by motion condition
     this.tb.ball.setvel(vel['x']*this.motioncond, vel['y']*this.motioncond);
-    // display trial 
+    // display trial
     var pev = 0;
     interid = setInterval(function () {
         pev = that.tb.step(dt,displaytime);
@@ -444,13 +444,13 @@ Trial.prototype.showtrial = function(dt,displaytime,responsetime,maxtime,callbac
 // Keep only the correct goal, either in (goalreachable is true),
 // or out (goalreachable is false)
 Trial.prototype.choosegoal = function(goalreachable) {
-    if (goalreachable) 
-        if (this.tb.goals[0].onret === GREENGOAL) 
+    if (goalreachable)
+        if (this.tb.goals[0].onret === GREENGOAL)
             this.tb.goals.splice(1, 1);
         else
             this.tb.goals.splice(0, 1);
-    else 
-        if (this.tb.goals[0].onret === GREENGOAL) 
+    else
+        if (this.tb.goals[0].onret === GREENGOAL)
             this.tb.goals.splice(0, 1);
         else
             this.tb.goals.splice(1, 1);
@@ -463,7 +463,7 @@ Trial.prototype.isgoalreachable= function() {
 };
 
 Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback,motioncond,goalcond,showscore) {
-    if (typeof(goalcond) === 'undefined') 
+    if (typeof(goalcond) === 'undefined')
         goalcond = (Math.random() < 0.5);
     this.goalreachable = (goalcond != 'out');
     this.choosegoal(this.goalreachable);
@@ -476,10 +476,9 @@ Trial.prototype.runtrial = function(dt,displaytime,responsetime,maxtime,callback
     else if (motioncond === 'reverse')
         this.motioncond = -1;
     else // generate random motion condition if undefined, one of {-1,0,1}
-        this.motioncond = Math.floor(Math.random()*3)-1; 
+        this.motioncond = Math.floor(Math.random()*3)-1;
 
     var that = this;
     var runfn = function() {that.showtrial(dt,displaytime,responsetime,maxtime,callback,showscore);};
     this.showinstruct('Press the spacebar to begin','black','lightgrey',runfn, true);
 };
-
