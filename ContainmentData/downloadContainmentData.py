@@ -37,8 +37,10 @@ def load_data_by_exp(experimentlist):
     # if you have workers you wish to exclude, add them here
     exclude = []
     for row in rows:
+        #if row['workerid'] == 'A15FXHC1CVNW31':
+        #    print 'here'
         # only use subjects who completed experiment and aren't excluded
-        if row['status'] in statuses and row['uniqueid'] not in exclude and row['codeversion'] in experimentlist:
+        if row['status'] in statuses and row['uniqueid'] not in exclude and row['codeversion'] in experimentlist and row['datastring'] is not None:
             rawdata.append(row[data_column_name])
             conds.append(row["cond"])
 
@@ -98,6 +100,27 @@ def transform_prediction(records):
 
     return newdf
 
+def remove_reach_filler(trnm):
+    trparts = trnm.split('_')
+    if trparts[1] == "reach":
+        del trparts[1]
+    return "_".join(trparts)
+
+def transform_reach(records):
+    records['Response'] = records['RawResponse']
+    records['TrialNameRaw'] = records['Trial']
+    records['Trial'] = [remove_reach_filler(tnm) for tnm in records['TrialNameRaw']]
+    trspls = [t.split('_') for t in records['Trial']]
+    records['TrialBase'] = ['_'.join(ts[:2]) for ts in trspls]
+    records['ContainmentType'] = [ts[0] for ts in trspls]
+    records['ContainmentLevel'] = [ts[2] for ts in trspls]
+    records['TrialNum'] = [ts[1] for ts in trspls]
+
+    newdf = records[['WID','Trial','TrialBase','ContainmentType','ContainmentLevel','TrialNum','GoalReachable',
+                     'MotionDirection','Response','RT','TrialOrder','WasBad']]
+    return newdf
 
 if __name__ == '__main__':
-    transform_prediction(load_data_by_exp([1.1])).to_csv("exp1_data.csv", index = False)
+    #transform_prediction(load_data_by_exp([1.1])).to_csv("exp1_data.csv", index = False)
+    #transform_prediction(load_data_by_exp([2.0])).to_csv("exp2_data.csv", index = False)
+    transform_reach(load_data_by_exp([3.0])).to_csv("exp3_data.csv", index=False)
