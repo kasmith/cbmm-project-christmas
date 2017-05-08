@@ -87,6 +87,23 @@ def get_distance(r1, r2):
     print(np.linalg.norm(r1_r2))
     return np.linalg.norm(r1_r2)
 
+def get_goal_direction(ball, goal):
+    ball_pos = ball[0]
+    goal_center = [(goal[0][0]+goal[1][0])/2, (goal[0][1]+goal[1][1])/2]
+    print('Goal center: ' + str(goal_center))
+    
+    unscaled_direction = [goal_center[0]-ball_pos[0], goal_center[1]-ball_pos[1]]
+    print('Unscaled dir: ' + str(unscaled_direction))
+
+    length = math.sqrt(unscaled_direction[0]**2 + unscaled_direction[1]**2)
+    print('Length: ' + str(length))
+
+    direction = [300*unscaled_direction[0]/length, 300*unscaled_direction[1]/length]
+    print('Direction: ' + str(direction))
+
+    return direction
+
+
 def get_json_walls(screen):
     s = np.copy(screen)
     json_walls = []
@@ -210,7 +227,8 @@ def get_trial(name='auto_trial', num_rects=10):
         if not has_overlap:
             has_overlap = (get_distance(ball_rect, goals[0]) < 350)
     # TODO Get ball direction by pointing it towards goal
-    ball = [[(ball_rect[TOP_LEFT][X]+ball_rect[BOTTOM_RIGHT][X])//2, (ball_rect[TOP_LEFT][Y]+ball_rect[BOTTOM_RIGHT][Y])//2], [132.8662569668213, -268.9731543474675], 20, [0, 0, 255], 1.0]
+    ball = [[(ball_rect[TOP_LEFT][X]+ball_rect[BOTTOM_RIGHT][X])//2, (ball_rect[TOP_LEFT][Y]+ball_rect[BOTTOM_RIGHT][Y])//2], None, 20, [0, 0, 255], 1.0]
+    ball[1] = get_goal_direction(ball, goals[0])
 
     draw_rectangle(screen, goals[0], color=3*WHITE//4, fill=True)
     draw_rectangle(screen, goals[1], color=3*WHITE//4, fill=True)
