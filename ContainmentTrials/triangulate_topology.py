@@ -1,9 +1,8 @@
 from physicsTable import *
-import pygame as pg
-from pygame.constants import *
 from operator import itemgetter
 import sys
-import triangle
+import geometry
+import numpy as np
 
 # Constants for ease
 L = 101
@@ -40,6 +39,16 @@ class Wall(object):
         tidxs = [i for i in range(len(others)) if self.touches(others[i])]
         self.is_touching = [others[i] for i in tidxs]
         return tidxs
+
+    # Determines whether a point touches any side
+    def touches_wall(self, point):
+        return geometry.point_on_line(point, [self.l, self.t], [self.r, self.t]) or \
+                geometry.point_on_line(point, [self.r, self.t], [self.r, self.b]) or \
+               geometry.point_on_line(point, [self.r, self.b], [self.l, self.b]) or \
+               geometry.point_on_line(point, [self.l, self.b], [self.l, self.t])
+
+    def touches_top_wall(self, point):
+        return geometry.point_on_line(point, [self.l, self.t], [self.r, self.t])
 
     # From a given point, traverses clockwise on the inside to collect points
     def get_next_point_and_wall_and_dir(self, lastpt, dir):
@@ -208,6 +217,19 @@ def get_topleft_wall(walls):
             most_left = w.l
     return best_idx, walls[best_idx]
 
+def get_topright_wall(walls):
+    best_idx = 0
+    most_top = walls[0].t
+    most_right = walls[0].r
+    for i in range(1, len(walls)):
+        w = walls[i]
+        if w.t < most_top or \
+                (w.t == most_top and w.r > most_right):
+            best_idx = i
+            most_top = w.t
+            most_right = w.r
+    return best_idx, walls[best_idx]
+
 def sort_by_direction(walls, dir):
     if dir == L:
         pfnc = lambda x: (x.l, -x.b)
@@ -236,35 +258,13 @@ def sort_by_outside_direction(walls, dir):
     vsort = sorted(vals, key=itemgetter(0))
     return [w for _, w in vsort]
 
-def draw_wall_outlines(surf, walls, color = (255,0,0)):
-    for w in walls:
-        r = w.to_pg_rect()
-        pg.draw.rect(surf, color, r, 2)
-    return surf
-
-def draw_everything(table, wall_list = [], ptlist = [], ptcol = (0,255,0)):
-    s = table.draw()
-    draw_wall_outlines(s, wall_list)
-    for p in ptlist:
-        pg.draw.circle(s, ptcol, p, 3)
-
-def wait_4_kp(draw_fn, hz):
-    clk = pg.time.Clock()
-    while True:
-        draw_fn()
-        pg.display.flip()
-        for e in pg.event.get():
-            if e.type == KEYDOWN:
-                return
-        clk.tick(hz)
-
 
 # Takes in a list of Walls, returns a list including:
 # [
 #   A list of points that form the inner hull,
 #   The walls used to form that hull
 # ]
-def get_inner_hull(walllist):
+def get_inner_hull(walls):
     # Start with the upper-left wall
     tl_idx, tl_wall = get_topleft_wall(walls)
     tl_wall.grouped = True
@@ -281,9 +281,29 @@ def get_inner_hull(walllist):
 
     add_walls(tl_wall, walls)
 
-    _, cur_wall = get_topleft_wall(tl_wall.is_touching)
-    cur_pt = (cur_wall.l, cur_wall.b)
-    cur_traverse = B
+    getting_first = True
+    not_goods = []
+    while getting_first:
+        getting_first = False
+        chkwalls = [w for w in tl_wall.is_touching if w not in not_goods]
+        if len(chkwalls) == 0:
+            # Edge case where we're finding some internal walls
+            cur_wall = tl_wall
+            cur_pt = (cur_wall.r, cur_wall.b)
+            cur_traverse   = R
+        else:
+            _, cur_wall = get_topright_wall(chkwalls)
+            cur_pt = (cur_wall.l, cur_wall.b)
+            # Check that there is not a wall below this point
+            for w in cur_wall.is_touching:
+                if w != tl_wall and w.touches_top_wall(cur_pt) and not getting_first:
+                    #wait_4_kp(lambda: draw_everything(tb, [tl_wall, cur_wall], [cur_pt]))
+                    not_goods.append(tl_wall)
+                    not_goods.append(cur_wall)
+                    tl_wall = w
+                    getting_first = True
+            cur_traverse = B
+
     inner_pts = [cur_pt]
 
     running = True
@@ -293,6 +313,7 @@ def get_inner_hull(walllist):
             running = False
         else:
             inner_pts.append(cur_pt)
+            #wait_4_kp(lambda: draw_everything(tb, walls, inner_pts))
 
     return inner_pts, inc_walls
 
@@ -331,76 +352,167 @@ def get_islands(rem_walls):
     return island_pts, islands
 
 
+
+
+# Takes in a trial and produces the list of triangles that make up its inner container.
+class Triangulation(object):
+    def __init__(self, trial):
+        self._trial = trial
+        self._walls = convert_trial_2_wallrects(self._trial)
+        inner_pts, inc_walls = get_inner_hull(self._walls)
+        rem_walls = [w for w in self._walls if w not in inc_walls]
+        islands, _ = get_islands(rem_walls)
+        self._init_tris, self._wound_hull = geometry.ear_clip_with_holes(inner_pts, islands)
+        self._has_all_tris = False
+        self._all_tris = [self._init_tris]
+
+    def make_all_triangulations(self):
+        if not self._has_all_tris:
+            for i in range(1, len(self._wound_hull)):
+                #if i == 5:
+                #    print 'here'
+                #    newtri = ear_clip(self._wound_hull[i:] +  self._wound_hull[:i])
+                newtri = geometry.ear_clip(self._wound_hull[i:] + self._wound_hull[:i])
+                self._all_tris.append(newtri)
+            self._has_all_tris = True
+
+    def make_graph(self):
+        pass
+
+    def triangulation(self, index = 0):
+        if index >0 and not self._has_all_tris:
+            print "Cannot get triangle by index without make_all_triangulations"
+            index = 0
+        return self._all_tris[index]
+
+    def get_n_tris(self):
+        return len(self._all_tris)
+    n_triangles = property(get_n_tris)
+
+class ACD(object):
+    def __init__(self, trial, convexity_limit = 10):
+        self._trial = trial
+        self._walls = convert_trial_2_wallrects(self._trial)
+        self._clim = convexity_limit
+        inner_pts, inc_walls = get_inner_hull(self._walls)
+        rem_walls = [w for w in self._walls if w not in inc_walls]
+        islands, _ = get_islands(rem_walls)
+        outer_shell = map(np.array, inner_pts)
+        polys = [outer_shell] + [map(np.array, pts) for pts in islands]
+        self._acd = geometry.approximate_convex_decomposition(polys, self._clim)
+        #self._acd = _acd_outer(outer_shell, self._clim, geometry._sl_concavity)
+
+
+
+# TEMPORARY
+from geometry import _find_cut_heur, _find_witness
+def _acd_outer(vertices, tau, witness_fnc):
+    d, witness, pocket = _find_witness(vertices, witness_fnc)
+    if d < tau:
+        return [vertices]  # We're below threshold or it's already convex
+    cut_v = _find_cut_heur(witness, vertices, pocket)
+    poly_1 = []
+    poly_2 = []
+    vidx = 0
+    on_poly_2 = False
+    for vidx in range(len(vertices)):
+        this_v = vertices[vidx]
+        # Are we at a cut point? If so, add to both polygons
+        if all(this_v == witness) or all(this_v == cut_v):
+            poly_1.append(this_v)
+            poly_2.append(this_v)
+            on_poly_2 = not on_poly_2
+        else:
+            if on_poly_2:
+                poly_2.append(this_v)
+            else:
+                poly_1.append(this_v)
+    wait_4_kp(lambda: draw_polys(tb, [poly_1, poly_2]))
+    return _acd_outer(poly_1, tau, witness_fnc) + _acd_outer(poly_2, tau, witness_fnc)
+
+
+
+
+
+
+
+
+def trianglulate_trial(trial, do_all_triangulations = False):
+    walls = convert_trial_2_wallrects(trial)
+    inner_pts, inc_walls = get_inner_hull(walls)
+    rem_walls = [w for w in walls if w not in inc_walls]
+    islands, _ = get_islands(rem_walls)
+    init_tris, wound_hull = geometry.ear_clip_with_holes(inner_pts, islands)
+    if do_all_triangulations:
+        tris = [init_tris]
+        for i in range(1, len(wound_hull)):
+            tris.append(geometry.ear_clip(wound_hull[i:] + wound_hull[:i]))
+        return tris
+    else:
+        return init_tris
+
 if __name__ == '__main__':
+
+    # If running directly, use PyGame -- otherwise allow loading without requiring these libraries
+    import pygame as pg
+    from pygame.constants import *
+
+
+    def draw_wall_outlines(surf, walls, color=(255, 0, 0)):
+        for w in walls:
+            r = w.to_pg_rect()
+            pg.draw.rect(surf, color, r, 2)
+        return surf
+
+
+    def draw_everything(table, wall_list=[], ptlist=[], tris = [], ptcol=(0, 255, 0), tricol=(255,0,0)):
+        s = table.draw()
+        draw_wall_outlines(s, wall_list)
+        for p in ptlist:
+            pg.draw.circle(s, ptcol, p, 4)
+        for t in tris:
+            pg.draw.polygon(s, tricol, t, 2)
+
+    def draw_polys(table, poly_list=[], ptlist=[], poly_col=(0,255,0), pt_col=(255,0,0)):
+        s = table.draw()
+        for p in poly_list:
+            pg.draw.polygon(s, poly_col, p, 2)
+        for p in ptlist:
+            pg.draw.circle(s, pt_col, p, 4)
+
+
+    def wait_4_kp(draw_fn, hz=20):
+        clk = pg.time.Clock()
+        while True:
+            draw_fn()
+            pg.display.flip()
+            for e in pg.event.get():
+                if e.type == KEYDOWN:
+                    return
+            clk.tick(hz)
+
+    # Load in the trial
     if len(sys.argv) == 1:
         tr = loadTrial('automatic_generator/samp.ptr')
     else:
         tr = loadTrialFromJSON(sys.argv[1])
-    walls = convert_trial_2_wallrects(tr)
 
     pg.init()
     s = pg.display.set_mode((1000, 620))
     tb = tr.makeTable()
+    #from numpy import array
+    #p1 = [array([79, 78]), array([493,  78]), array([493, 114]), array([678, 114]), array([678, 163]), array([928, 163]), array([928, 269]), array([934, 269]), array([934, 491]), array([974, 491]), array([974, 596]), array([909, 596]), array([909, 560]), array([663, 560]), array([663, 491]), array([699, 491]), array([699, 401]), array([656, 469]), array([588, 469]), array([588, 401]), array([551, 401]), array([551, 365]), array([438, 365]), array([438, 431]), array([153, 431]), array([153, 258]), array([ 79, 258])]
+    #p2 = [array([699,401]), array([656,401]), array([656,469])]
+    #wait_4_kp(lambda: draw_polys(tb, [p2]))
 
-    wait_4_kp(lambda: draw_everything(tb, []), 20)
-
-    '''
-    tl_idx, tl_wall = get_topleft_wall(walls)
-    tl_wall.grouped = True
-    inc_walls = [tl_wall]
-
-    def add_walls(w1, others):
-        tidxs = w1.get_touch_indices(others)
-        for i in tidxs:
-            ow = others[i]
-            if not ow.grouped:
-                inc_walls.append(ow)
-                ow.grouped = True
-                add_walls(ow, others)
-        return
-
-    add_walls(tl_wall, walls)
-
-    _, cur_wall = get_topleft_wall(tl_wall.is_touching)
-    cur_pt = (cur_wall.l, cur_wall.b)
-    cur_traverse = B
-    inner_pts = [cur_pt]
-    #wait_4_kp(lambda: draw_everything(tb, inc_walls, inner_pts), 20)
-
-    running = True
-    while running:
-        cur_pt, cur_wall, cur_traverse = cur_wall.get_next_point_and_wall_and_dir(cur_pt, cur_traverse)
-        if cur_pt == inner_pts[0]:
-            running = False
-        else:
-            inner_pts.append(cur_pt)
-        wait_4_kp(lambda: draw_everything(tb, inc_walls, inner_pts), 20)
+    acd = ACD(tr, 20)
+    for cd in acd._acd:
+        print cd
+    wait_4_kp(lambda: draw_polys(tb, acd._acd))
 
 
+    #triang = Triangulation(tr)
+    #triang.make_all_triangulations()
 
-    wait_4_kp(lambda: draw_everything(tb, inc_walls, []), 20)
-    cur_wall = tl_wall
-    cur_pt = (cur_wall.l, cur_wall.t)
-    cur_traverse = T
-    outer_pts = [cur_pt]
-    running = True
-    wait_4_kp(lambda: draw_everything(tb, inc_walls, outer_pts), 20)
-    while running:
-        cur_pt, cur_wall, cur_traverse = cur_wall.get_next_outer_point_and_wall_and_dir(cur_pt, cur_traverse)
-        if cur_pt == outer_pts[0]:
-            running = False
-        else:
-            outer_pts.append(cur_pt)
-        wait_4_kp(lambda: draw_everything(tb, inc_walls, outer_pts), 20)
-    '''
-
-    inner_pts, inc_walls = get_inner_hull(walls)
-    wait_4_kp(lambda: draw_everything(tb, inc_walls, inner_pts), 20)
-
-    rem_walls = [w for w in walls if w not in inc_walls]
-    #wait_4_kp(lambda: draw_everything(tb, rem_walls, inner_pts), 20)
-
-    islands = get_islands(rem_walls)
-    print islands
-    for ipt, iwalls in zip(*islands):
-        wait_4_kp(lambda: draw_everything(tb, iwalls, ipt), 20)
+    #for i in range(triang.n_triangles):
+    #    wait_4_kp(lambda: draw_everything(tb, [], [], triang.triangulation(i)))
