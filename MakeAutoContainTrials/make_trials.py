@@ -44,42 +44,48 @@ if __name__ == '__main__':
         sum_fl.write("Tri_Size,Tri_MaxGeodesic,Tri_MinToGoal\n")
 
         for i in range(n_trials):
-            tidx = i+beg_idx
-            tnm = "RandomTrial_{:04d}".format(tidx)
-            tr, dat = make_valid_trial(tnm, RECTRANGE, MIN_TIME, MAX_FWD_TIME, MAX_REV_TIME,
-                             MIN_TIME_DIFF, MIN_GOAL_DIST)
-            sum_fl.write(tnm+','+str(dat['rects'])+','+str(dat['walls'])+','+str(dat['dist_to_goal'])+',')
-            sum_fl.write(str(dat['fwd_time'])+','+str(dat['rev_time'])+',')
+            running = True
+            # Retry if anything goes wrong
+            while running:
+                try:
+                    tidx = i+beg_idx
+                    tnm = "RandomTrial_{:04d}".format(tidx)
+                    tr, dat_tr = make_valid_trial(tnm, RECTRANGE, MIN_TIME, MAX_FWD_TIME, MAX_REV_TIME,
+                                     MIN_TIME_DIFF, MIN_GOAL_DIST)
 
-            # Simulation
-            tb_fwd = tr.makeTable()
-            ps_fwd = PointSimulation(tb_fwd, KAP_V, KAP_B, KAP_M, P_ERR, nsims=N_SIMS, cpus=1)
-            _, _, bounces_fwd, times_fwd = ps_fwd.runSimulation()
-            tb_rev = tr.makeTable()
-            bvel = tr.ball[1]
-            tb_rev.balls.setvel([-bvel[0], -bvel[1]])
-            ps_rev = PointSimulation(tb_rev, KAP_V, KAP_B, KAP_M, P_ERR, nsims=N_SIMS, cpus=1)
-            _, _, bounces_rev, times_rev = ps_rev.runSimulation()
-            sum_fl.write(str(np.mean(times_fwd))+','+str(np.mean(bounces_fwd))+',')
-            sum_fl.write(str(np.mean(times_rev))+','+str(np.mean(bounces_rev))+',')
+                    # Simulation
+                    tb_fwd = tr.makeTable()
+                    ps_fwd = PointSimulation(tb_fwd, KAP_V, KAP_B, KAP_M, P_ERR, nsims=N_SIMS, cpus=1)
+                    _, _, bounces_fwd, times_fwd = ps_fwd.runSimulation()
+                    tb_rev = tr.makeTable()
+                    bvel = tr.ball[1]
+                    tb_rev.balls.setvel([-bvel[0], -bvel[1]])
+                    ps_rev = PointSimulation(tb_rev, KAP_V, KAP_B, KAP_M, P_ERR, nsims=N_SIMS, cpus=1)
+                    _, _, bounces_rev, times_rev = ps_rev.runSimulation()
 
-            # Flooding
-            fl = Flooder(tr, False)
-            dat = fl.run()
-            sum_fl.write(str(dat['size'])+','+str(dat['max_geodesic_dist'])+','+str(dat['min_dist_to_goal'])+',')
+                    # Flooding
+                    fl = Flooder(tr, False)
+                    dat_fl = fl.run()
 
-            # ACD and triangulation
-            topo = TopologyModel(tr, acd_convexity_by_ball_rad=ACD_CONVEX_RAD_TIMES)
-            topo_acds = topo.acd
-            for c in ACD_CONVEX_RAD_TIMES:
-                dat = topo_acds[c]
-                sum_fl.write(
-                    str(dat['size']) + ',' + str(dat['max_geodesic_dist']) + ',' + str(dat['min_dist_to_goal']) + ',')
+                    # ACD and triangulation
+                    topo = TopologyModel(tr, acd_convexity_by_ball_rad=ACD_CONVEX_RAD_TIMES)
+                    topo_acds = topo.acd
 
-            dat = topo.triangulation
-            sum_fl.write(
-                str(dat['size']) + ',' + str(dat['max_geodesic_dist']) + ',' + str(dat['min_dist_to_goal']) + '\n')
-            tr.jsonify(os.path.join(TRIAL_DIR, tnm+'.json'),askoverwrite=False)
-            print "Done:", tnm
+                    dat_tri = topo.triangulation
+
+                    sum_fl.write(tnm + ',' + str(dat_tr['rects']) + ',' + str(dat_tr['walls']) + ',')
+                    sum_fl.write(str(dat_tr['dist_to_goal']) + ',' + str(dat_tr['fwd_time']) + ',' + str(dat_tr['rev_time']) + ',')
+                    sum_fl.write(str(np.mean(times_fwd)) + ',' + str(np.mean(bounces_fwd)) + ',')
+                    sum_fl.write(str(np.mean(times_rev)) + ',' + str(np.mean(bounces_rev)) + ',')
+                    sum_fl.write(str(dat_fl['size']) + ',' + str(dat_fl['max_geodesic_dist']) + ',' + str(dat_fl['min_dist_to_goal']) + ',')
+                    for c in ACD_CONVEX_RAD_TIMES:
+                        dat = topo_acds[c]
+                        sum_fl.write(str(dat['size']) + ',' + str(dat['max_geodesic_dist']) + ',' + str(dat['min_dist_to_goal']) + ',')
+                    sum_fl.write(str(dat_tri['size']) + ',' + str(dat_tri['max_geodesic_dist']) + ',' + str(dat_tri['min_dist_to_goal']) + '\n')
+                    tr.jsonify(os.path.join(TRIAL_DIR, tnm+'.json'),askoverwrite=False)
+                    running = False
+                    print "Done:", tnm
+                except:
+                    pass
 
 
