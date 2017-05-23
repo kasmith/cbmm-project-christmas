@@ -1,0 +1,1797 @@
+2014-10-10 14:50:33,579 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-10 14:50:33,579 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-10-10 14:50:33 -0700] [76068] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+[2014-10-10 14:50:33 -0700] [76065] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+[2014-10-10 14:50:33 -0700] [76064] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+2014-10-10 14:50:40,174 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-10 14:50:40,531 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-10 14:50:40,770 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-10 14:50:40,867 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-10 14:50:40,914 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:31:47,370 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:31:47,481 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:31:47,573 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:31:47,676 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:31:47,681 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:43:16,597 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:43:16,623 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:43:16,670 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:43:16,693 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 09:43:16,795 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-10-13 12:07:22 -0700] [77398] [CRITICAL] WORKER TIMEOUT (pid:77403)
+[2014-10-13 12:07:22 -0700] [77398] [CRITICAL] WORKER TIMEOUT (pid:77406)
+2014-10-13 12:07:23,400 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 12:07:23,406 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 12:55:49,534 Exception on /trials/undefined.json [GET]
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/undefined.json
+[2014-10-13 14:02:48 -0700] [77398] [CRITICAL] WORKER TIMEOUT (pid:77848)
+2014-10-13 14:02:51,203 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 15:16:27,201 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 15:16:27,210 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 15:16:27,255 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 15:16:27,275 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-13 15:16:27,341 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 10:41:24,728 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 10:41:24,730 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 10:41:24,743 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 10:41:24,747 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 10:41:24,751 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:06:17,283 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2014-10-14 11:07:14,870 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2014-10-14 11:07:46,210 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2014-10-14 11:08:21,072 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:08:21,077 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:08:21,180 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:08:21,397 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:08:21,531 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-14 11:08:32,367 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2014-10-16 15:38:02,408 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:02,589 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:02,928 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:02,948 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:02,989 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:02,998 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:03,013 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:03,039 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-10-16 15:38:03,039 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-03 10:08:01 -0800] [8164] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+2014-11-03 10:08:01,332 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:01,332 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:01,334 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:01,335 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:07,705 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:07,872 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:08,485 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:08,711 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:08:08,768 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:00,214 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:00,233 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:00,239 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-03 10:36:00 -0800] [516] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG" already exists u'\nCREATE TABLE "basicRG" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+2014-11-03 10:36:00,292 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:08,549 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:08,638 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:08,664 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:08,706 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 10:36:08,736 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 15:43:54,619 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 15:43:54,772 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 15:43:54,820 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 15:43:54,866 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 15:43:54,873 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-03 17:59:32 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:1403)
+[2014-11-03 17:59:32 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:1404)
+[2014-11-03 17:59:32 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:1405)
+[2014-11-03 17:59:32 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:1406)
+[2014-11-03 17:59:32 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:1407)
+2014-11-03 17:59:42,634 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 17:59:42,642 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 17:59:42,652 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 17:59:42,653 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-03 17:59:42,661 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-04 07:58:28 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:2165)
+[2014-11-04 07:58:28 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:2166)
+[2014-11-04 07:58:28 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:2167)
+[2014-11-04 07:58:28 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:2168)
+[2014-11-04 07:58:28 -0800] [1399] [CRITICAL] WORKER TIMEOUT (pid:2169)
+2014-11-04 07:58:32,144 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 07:58:32,278 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 07:58:32,478 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 07:58:32,482 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 07:58:32,520 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 10:25:33,694 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 10:25:33,694 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 10:25:33,704 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 10:25:33,707 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 10:25:33,757 /opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,114 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2014-11-04 13:57:38 -0800] [2907] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Library/Python/2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Library/Python/2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Library/Python/2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Library/Python/2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Library/Python/2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/Library/Python/2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/Library/Python/2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG_test" already exists u'\nCREATE TABLE "basicRG_test" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/Library/Python/2.7/site-packages/gunicorn/workers/base.py", line 114, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/Library/Python/2.7/site-packages/gunicorn/app/base.py", line 66, in wsgi
+    self.callable = self.load()
+  File "/Library/Python/2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/Library/Python/2.7/site-packages/gunicorn/util.py", line 356, in import_app
+    __import__(module)
+  File "/Library/Python/2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/Library/Python/2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/schema.py", line 3352, in create_all
+    tables=tables)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1617, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1246, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 713, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/visitors.py", line 120, in traverse_single
+    return meth(obj, **kw)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 732, in visit_table
+    self.connection.execute(CreateTable(table))
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 729, in execute
+    return meth(self, multiparams, params)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/sql/ddl.py", line 69, in _execute_on_connection
+    return connection._execute_ddl(self, multiparams, params)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 783, in _execute_ddl
+    compiled
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 958, in _execute_context
+    context)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 1160, in _handle_dbapi_exception
+    exc_info
+  File "/Library/Python/2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/base.py", line 951, in _execute_context
+    context)
+  File "/Library/Python/2.7/site-packages/sqlalchemy/engine/default.py", line 436, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG_test" already exists u'\nCREATE TABLE "basicRG_test" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+2014-11-04 13:57:38,304 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,393 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,524 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,556 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,557 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,595 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:38,610 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,227 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,228 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,336 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,475 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,549 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,576 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,593 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,623 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2014-11-04 13:57:44,628 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:34,758 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:34,911 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:34,952 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,163 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,207 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,234 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,239 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,264 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 11:04:35,315 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1398)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1399)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1400)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1401)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1402)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1403)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1404)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1405)
+[2015-06-08 12:13:51 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1406)
+2015-06-08 12:13:53,525 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,599 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,610 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,625 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,639 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,689 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,695 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,730 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 12:13:53,743 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1519)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1520)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1521)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1522)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1523)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1524)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1525)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1526)
+[2015-06-08 13:08:35 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1527)
+2015-06-08 13:08:36,860 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:36,879 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:36,884 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:36,903 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:37,070 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:37,109 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:37,111 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:37,121 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:08:37,128 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1556)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1558)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1559)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1560)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1561)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1562)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1563)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1564)
+[2015-06-08 13:21:11 -0700] [1394] [CRITICAL] WORKER TIMEOUT (pid:1557)
+2015-06-08 13:21:13,647 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,668 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,717 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,804 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,805 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,827 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,879 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,905 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-06-08 13:21:13,912 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,417 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,548 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,584 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,659 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,661 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,675 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,681 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-08 10:40:49,709 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:04,692 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:04,900 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:04,947 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,043 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,068 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,083 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,102 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,122 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:05,129 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 09:13:23,387 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Python/2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2015-09-11 09:13:51,285 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Python/2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+2015-09-11 09:15:37,097 Exception on /trials/InstTr1.json [GET]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Library/Python/2.7/site-packages/psiturk/experiment.py", line 666, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/InstTr1.json
+[2015-09-11 10:51:11 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8046)
+2015-09-11 10:51:12,114 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 11:52:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8044)
+[2015-09-11 11:52:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8047)
+2015-09-11 11:52:39,804 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 11:52:39,806 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 12:44:23 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8043)
+[2015-09-11 12:44:23 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8045)
+[2015-09-11 12:44:23 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8048)
+[2015-09-11 12:44:23 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8050)
+2015-09-11 12:44:26,579 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 12:44:26,579 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 12:44:26,579 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 12:44:26,579 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8163)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8233)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8234)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8235)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8236)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8049)
+[2015-09-11 15:59:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8051)
+2015-09-11 16:00:01,774 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,780 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,784 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,790 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,795 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,805 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:00:01,807 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,567 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,577 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,604 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,611 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,649 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,654 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,666 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,675 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:01:01,675 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8352)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8353)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8354)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8355)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8347)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8348)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8349)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8350)
+[2015-09-11 16:34:55 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8351)
+2015-09-11 16:34:57,755 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,773 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,772 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,774 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,774 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,772 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,781 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,771 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 16:34:57,786 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8420)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8421)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8422)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8423)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8424)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8425)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8426)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8427)
+[2015-09-11 17:34:37 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8419)
+2015-09-11 17:34:38,976 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:38,979 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:38,987 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:38,988 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:39,038 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:39,081 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:39,088 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:39,095 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:34:39,124 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8492)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8493)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8494)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8495)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8496)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8497)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8498)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8499)
+[2015-09-11 17:58:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8500)
+2015-09-11 17:58:29,078 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,108 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,110 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,135 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,145 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,203 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,269 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,281 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 17:58:29,290 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8512)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8514)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8515)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8516)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8507)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8508)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8509)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8510)
+[2015-09-11 18:34:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8511)
+2015-09-11 18:34:25,991 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,092 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,155 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,342 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,377 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,407 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,417 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,424 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 18:34:26,434 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8551)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8552)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8553)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8554)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8555)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8556)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8557)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8558)
+[2015-09-11 21:53:26 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8559)
+2015-09-11 21:53:29,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,216 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,217 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,233 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,240 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 21:53:29,240 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8714)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8715)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8716)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8717)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8718)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8719)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8720)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8721)
+[2015-09-11 23:54:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8722)
+2015-09-11 23:54:09,428 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,453 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,543 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,541 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,567 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,700 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,720 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,726 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-11 23:54:09,733 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8739)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8740)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8741)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8742)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8743)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8744)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8745)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8746)
+[2015-09-12 01:54:47 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8747)
+2015-09-12 01:54:49,455 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,461 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,466 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,591 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,708 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,747 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,772 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,778 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 01:54:49,793 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8768)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8769)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8770)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8771)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8763)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8764)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8765)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8766)
+[2015-09-12 03:55:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8767)
+2015-09-12 03:55:29,926 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,105 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,185 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,195 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,221 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,284 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,307 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,314 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 03:55:30,322 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8883)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8884)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8885)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8886)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8887)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8888)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8889)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8890)
+[2015-09-12 05:56:07 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8891)
+2015-09-12 05:56:09,233 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,234 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,238 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,256 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,299 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,324 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,375 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,384 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 05:56:09,403 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8910)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8911)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8912)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8913)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8914)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8915)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8916)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8917)
+[2015-09-12 07:33:24 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8918)
+2015-09-12 07:33:26,437 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,438 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,450 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,565 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,615 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,651 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,729 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,740 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 07:33:26,745 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8931)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8932)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8933)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8934)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8935)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8936)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8937)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8938)
+[2015-09-12 09:30:02 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:8939)
+2015-09-12 09:30:05,398 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,412 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,415 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,426 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,427 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,426 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,434 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,433 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 09:30:05,440 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9008)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9009)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9010)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9012)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9013)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9014)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9015)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9016)
+[2015-09-12 19:59:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9017)
+2015-09-12 19:59:17,196 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,197 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,250 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,258 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,259 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,270 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,287 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,316 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 19:59:17,327 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9027)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9028)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9029)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9030)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9031)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9032)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9033)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9034)
+[2015-09-12 21:09:45 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9035)
+2015-09-12 21:09:47,465 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,473 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,566 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,693 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,718 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,728 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,763 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,773 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-12 21:09:47,783 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9056)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9057)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9058)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9059)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9060)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9052)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9053)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9054)
+[2015-09-13 09:56:13 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9055)
+2015-09-13 09:56:17,931 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,931 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,931 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,938 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,944 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,947 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,949 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,951 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 09:56:17,957 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9152)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9143)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9144)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9145)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9146)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9147)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9148)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9149)
+[2015-09-13 12:45:27 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9151)
+2015-09-13 12:45:30,071 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,071 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,071 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,086 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,089 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,093 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,093 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,097 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 12:45:30,120 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 18:12:31 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9299)
+[2015-09-13 18:12:31 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9302)
+2015-09-13 18:12:33,731 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:12:33,731 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9321)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9322)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9300)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9301)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9303)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9304)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9305)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9306)
+[2015-09-13 18:59:10 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9307)
+2015-09-13 18:59:12,958 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:12,961 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:12,959 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:12,975 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:12,981 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:12,986 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:13,001 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:13,003 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 18:59:13,002 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9361)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9362)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9363)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9364)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9365)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9366)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9368)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9369)
+[2015-09-13 20:03:57 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9370)
+2015-09-13 20:04:00,082 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,086 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,106 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,108 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,120 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,126 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,161 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,181 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 20:04:00,197 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9413)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9414)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9415)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9416)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9417)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9418)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9419)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9420)
+[2015-09-13 23:06:41 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9421)
+2015-09-13 23:06:43,105 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,119 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,123 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,204 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,206 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,212 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,213 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,267 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-09-13 23:06:43,280 /Library/Python/2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9504)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9505)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9506)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9507)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9499)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9500)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9501)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9502)
+[2015-09-14 00:32:38 -0700] [8039] [CRITICAL] WORKER TIMEOUT (pid:9503)
+2016-12-28 01:55:39 [30103] [CRITICAL] WORKER TIMEOUT (pid:30109)
+2016-12-28 01:55:39 [30103] [CRITICAL] WORKER TIMEOUT (pid:30109)
+2016-12-28 02:22:51 [30103] [CRITICAL] WORKER TIMEOUT (pid:30139)
+2016-12-28 02:22:51 [30103] [CRITICAL] WORKER TIMEOUT (pid:30139)
+2016-12-28 05:27:05 [30103] [CRITICAL] WORKER TIMEOUT (pid:30108)
+2017-01-13 10:56:31,586 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 395, in start_exp
+    db_session.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 541, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) database is locked u'INSERT INTO "basicRG_test" (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' ('debug2DZFPQ:debugZY1ISJ', u'debugZY1ISJ', u'debug2DZFPQ', u'debugKF6BZX', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2017-01-13 10:56:26.538977', None, None, 0.0, 1, None)
+2017-01-13 10:56:42,523 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 395, in start_exp
+    db_session.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 541, in _emit_insert_statements
+    execute(statement, multiparams)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) database is locked u'INSERT INTO "basicRG_test" (uniqueid, assignmentid, workerid, hitid, ipaddress, browser, platform, language, cond, counterbalance, codeversion, beginhit, beginexp, endhit, bonus, status, datastring) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' ('debug2DZFPQ:debugZY1ISJ', u'debugZY1ISJ', u'debug2DZFPQ', u'debugKF6BZX', '127.0.0.1', 'chrome', 'macos', 'UNKNOWN', 0, 0, '1.0', '2017-01-13 10:56:37.485510', None, None, 0.0, 1, None)
+[2017-01-18 16:53:54 -0800] [42882] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
+    worker.init_process()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
+    self.load_wsgi()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 84, in <module>
+    init_db()
+  File "/usr/local/lib/python2.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/schema.py", line 2848, in create_all
+    tables=tables)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1479, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1122, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 122, in traverse_single
+    return meth(obj, **kw)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/ddl.py", line 70, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 122, in traverse_single
+    return meth(obj, **kw)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/ddl.py", line 89, in visit_table
+    self.connection.execute(schema.CreateTable(table))
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 720, in _execute_ddl
+    compiled
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG_test" already exists u'\nCREATE TABLE "basicRG_test" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/arbiter.py", line 515, in spawn_worker
+    worker.init_process()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/workers/base.py", line 122, in init_process
+    self.load_wsgi()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/workers/base.py", line 130, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment_server.py", line 47, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/usr/local/lib/python2.7/site-packages/gunicorn/util.py", line 357, in import_app
+    __import__(module)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 84, in <module>
+    init_db()
+  File "/usr/local/lib/python2.7/site-packages/psiturk/db.py", line 37, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/schema.py", line 2848, in create_all
+    tables=tables)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1479, in _run_visitor
+    conn._run_visitor(visitorcallable, element, **kwargs)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1122, in _run_visitor
+    **kwargs).traverse_single(element)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 122, in traverse_single
+    return meth(obj, **kw)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/ddl.py", line 70, in visit_metadata
+    self.traverse_single(table, create_ok=True)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/sql/visitors.py", line 122, in traverse_single
+    return meth(obj, **kw)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/ddl.py", line 89, in visit_table
+    self.connection.execute(schema.CreateTable(table))
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 720, in _execute_ddl
+    compiled
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/usr/local/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+OperationalError: (OperationalError) table "basicRG_test" already exists u'\nCREATE TABLE "basicRG_test" (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n' ()
+[2017-03-22 11:18:36 -0400] [11521] [CRITICAL] WORKER TIMEOUT (pid:11532)
+2017-05-10 14:58:22,454 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 14:58:25,278 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 14:58:26,888 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:04,777 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:06,006 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:07,124 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:20,390 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:21,666 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+2017-05-10 15:01:22,352 Exception on /trials/RandomTrial_0491 [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/usr/local/lib/python2.7/site-packages/psiturk/experiment.py", line 685, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/usr/local/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/usr/local/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: trials/RandomTrial_0491
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7702)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7703)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7704)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7705)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7706)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7707)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7708)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7709)
+[2017-05-10 18:02:53 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:7710)
+[2017-05-10 18:25:45 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:8457)
+[2017-05-10 18:25:45 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:8458)
+[2017-05-10 18:25:45 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:8460)
+[2017-05-10 18:25:45 -0400] [7698] [CRITICAL] WORKER TIMEOUT (pid:8465)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1423)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1424)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1425)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1426)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1427)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1428)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1429)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1430)
+[2017-05-11 20:33:10 -0400] [1419] [CRITICAL] WORKER TIMEOUT (pid:1431)
