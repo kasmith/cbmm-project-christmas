@@ -26,6 +26,8 @@ def parse_walls(json_trial_name):
     with open(sys.argv[1][:-5] + '_walls.json', 'w' ) as f:
         f.write(json)
 
+    return walls
+
 if __name__ == '__main__':
     assert len(sys.argv) == 2, "Need trial"
     parse_walls(sys.argv[1])
