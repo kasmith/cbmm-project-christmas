@@ -5,11 +5,9 @@ from pygame.constants import *
 from physicsTable import *
 from trial_generator import get_json_walls, WHITE, BLACK, X, Y
 
-def main(): 
-    assert len(sys.argv) == 2, "Need trial"
-
+def parse_walls(json_trial_name): 
     # get trial pixel array
-    tr = loadTrialFromJSON(sys.argv[1])
+    tr = loadTrialFromJSON(json_trial_name)
     tb = tr.makeTable()
     surface = tb.draw()
     screen = pg.surfarray.array2d(surface)
@@ -29,6 +27,5 @@ def main():
         f.write(json)
 
 if __name__ == '__main__':
-    main()
-    
-
+    assert len(sys.argv) == 2, "Need trial"
+    parse_walls(sys.argv[1])
