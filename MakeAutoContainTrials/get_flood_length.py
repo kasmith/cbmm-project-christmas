@@ -27,7 +27,7 @@ class Flooder(object):
             lr = g[1]
             for x in range(ul[0],lr[0]):
                 for y in range(ul[1],lr[1]):
-                    if g[3] == RED: self.map[x,y] = R
+                    if list(g[3]) == list(RED): self.map[x,y] = R
                     else: self.map[x,y] = G
         for w in tr.normwalls:
             ul = w[0]
