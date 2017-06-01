@@ -1,10 +1,42 @@
 from __future__ import division
 from physicsTable import *
+from physicsTable.models import PointSimulation
 from get_flood_length import Flooder
 from view_trial_parsing import view_trial_parsing
 import glob, os, sys
 
-def get_noncontained_walls(tr):
+MAX_WALLS_DEL = 5
+MIN_WALLS_DEL = 1
+
+def get_noncontained_walls(tr, enforce_goal_switch=False, 
+        min_walls_del=MIN_WALLS_DEL, max_walls_del=MAX_WALLS_DEL):
+    orig_goal = get_goal(tr)
+    orig_rev_goal = get_goal(tr, reverse_dir=True)
+    walls = list(tr.normwalls)
+    new_walls = None
+    num_walls_del = min_walls_del
+    min_flood_dist = 9999999 # big integer
+    while new_walls is None and num_walls_del <= min_walls_del:
+        for i in range(len(tr.normwalls) - num_walls_del + 1):
+            for _ in range(num_walls_del):
+                tr.normwalls.remove(tr.normwalls[i])
+            fl = Flooder(tr, useBallSize=True)
+            fl.run()
+            # assumes gsteps is steps to the outside goal
+            if fl.gsteps != -1 and fl.gsteps < min_flood_dist:
+                new_goal = get_goal(tr)
+                new_rev_goal = get_goal(tr, reverse_dir=True)
+                if not enforce_goal_switch or (orig_goal != new_goal 
+                        and orig_rev_goal != new_rev_goal):
+                    min_flood_dist = fl.gsteps
+                    new_walls = tr.normwalls
+            tr.normwalls = list(walls)
+        num_walls_del += 1
+    if new_walls is not None:
+        print 'Removed ' + str(num_walls_del - 1) + ' walls.'
+    return new_walls
+
+def get_noncontained_walls_same_path(tr):
     orig_path = get_path(tr)
     orig_rev_path = get_path(tr, reverse_dir=True)
     walls = list(tr.normwalls)
