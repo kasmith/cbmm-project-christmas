@@ -1,0 +1,4 @@
+SubjID,Trial,Order,Motion,Switched,RT,RawResponse,RawGoal,Score,Response,Goal,Correct
+testeye,complex_1_a,0,Fwd,Switched,1375,R,R,36,G,G
+testeye,complex_1_a,0,Rev,Switched,1200,G,G,47,R,R
+testeye,complex_1_a,0,None,Switched,350,R,R,97,G,G

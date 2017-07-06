@@ -1,0 +1,4 @@
+SubjID,Trial,Order,Motion,Switched,RT,RawResponse,RawGoal,Score,Response,Goal,Correct
+None,complex_1_a,0,Fwd,Forward,250,G,G,100,G,G
+None,complex_1_a,0,Rev,Forward,-1,NA,G,0,NA,G
+None,complex_1_a,0,None,Forward,-1,NA,G,0,NA,G
